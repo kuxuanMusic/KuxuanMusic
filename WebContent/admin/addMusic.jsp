@@ -20,29 +20,29 @@
 </style>
 </head>
 <body>
-	<form action="admin/MusicServlet" id="addmusic" method="post">
+	<form action="MusicServlet?op=addMusic" id="addmusic" method="post">
 	<input id="op" type="text"  value="addMusic" hidden/>
     <table style="width: 600px;margin: 200px auto;">
         <tr>
             <th>歌曲名：</th>
-            <td><input type="text" required></td>
+            <td><input type="text" id="musicname" name="musicname" required></td>
         </tr>
         <tr>
             <th>歌手名：</th>
-            <td><input type="text" required></td>
+            <td><input type="text" id="singername" name="singername" required></td>
         </tr>
         <tr>
             <th>专辑名：</th>
-            <td><input type="text" ></td>
+            <td><input type="text"  id="albumname" name="albumname" /></td>
         </tr>
         <tr>
             <th>发布时间：</th>
-            <td><input id="dd" type="text" class="easyui-datebox" required> </td>
+            <td><input id="dd" type="text" class="easyui-datebox"  id="releasetime" name="releasetime" required> </td>
         </tr>
         <tr>
             <th>歌曲类型：</th>
             <td>
-                <select style="width:100px;">
+                <select style="width:100px;" id="musictype" name="musictype">
                     <option value="1" selected>流行</option>
                     <option value="2">古典</option>
                     <option value="3">爵士</option>
@@ -56,7 +56,7 @@
         <tr>
             <th>语种：</th>
             <td>
-                <select style="width:100px;">
+                <select style="width:100px;" id="language" name="language">
                     <option value="1" selected>汉语</option>
                     <option value="2">日语</option>
                     <option value="3">英语</option>
@@ -71,7 +71,10 @@
         </tr>
         <tr>
             <th>存放地址：</th>
-            <td><input type="text" required></td>
+            <td><input type="text" id="address" name="address" required></td>
+        </tr>
+        <tr>
+        	<th><span>${msg}</span></th>
         </tr>
         <tr>
             <th colspan="2" style="text-align:center;">
