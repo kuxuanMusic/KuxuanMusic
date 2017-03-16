@@ -28,7 +28,7 @@ public class Album {
 	/**
 	 * 发行公司
 	 */
-	private Date releaseCompany;
+	private String releaseCompany;
 	/**
 	 * 专辑类型
 	 */
@@ -36,10 +36,9 @@ public class Album {
 
 	public Album() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Album(String albumName, int languageId, Date releaseTime, Date releaseCompany, int typeid) {
+	public Album(String albumName, int languageId, Date releaseTime, String releaseCompany, int typeid) {
 		super();
 		this.albumName = albumName;
 		this.languageId = languageId;
@@ -72,11 +71,11 @@ public class Album {
 		this.releaseTime = releaseTime;
 	}
 
-	public Date getReleaseCompany() {
+	public String getReleaseCompany() {
 		return releaseCompany;
 	}
 
-	public void setReleaseCompany(Date releaseCompany) {
+	public void setReleaseCompany(String releaseCompany) {
 		this.releaseCompany = releaseCompany;
 	}
 

@@ -45,5 +45,9 @@ public class MusicDao {
 	//根据歌手名和歌曲名查询歌曲
 	public void selectMusicByMusicNameAndSingerName(String music){
 		String sql = "SELECT * FROM music m, singer s WHERE m.singerid = s.singerid AND m.musicname = ? AND s.singername = ?";
+		Connection conn = Dao.Connection();
+		
+		
+		
 	}
 }
