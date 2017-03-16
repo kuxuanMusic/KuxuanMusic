@@ -17,7 +17,7 @@ public class DateUtil {
 	 * @return str
 	 */
 	public static String dateToString(Date date){
-		 sdf = new SimpleDateFormat("yyyy-MM-dd");
+		 sdf = new SimpleDateFormat("dd/MM/yyyy");
 		 String str = sdf.format(date);
 		return str;
 	}
@@ -28,7 +28,7 @@ public class DateUtil {
 	 * @return date
 	 */
 	public static Date stringToDate(String str){
-		sdf = new SimpleDateFormat("yyyy-MM-dd");
+		sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = null;
 		try {
 			date = sdf.parse(str);
