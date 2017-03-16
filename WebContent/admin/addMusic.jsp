@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<base href="">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../Css/default.css"/>
 <link rel="stylesheet" type="text/css" href="../jquery-easyui-1.5.1/themes/default/easyui.css" />
@@ -19,7 +20,8 @@
 </style>
 </head>
 <body>
-	<form action="">
+	<form action="admin/MusicServlet" id="addmusic" method="post">
+	<input id="op" type="text"  value="addMusic" hidden/>
     <table style="width: 600px;margin: 200px auto;">
         <tr>
             <th>歌曲名：</th>
@@ -40,9 +42,8 @@
         <tr>
             <th>歌曲类型：</th>
             <td>
-                <select>
-                    <option value="0" selected>--请选择--</option>
-                    <option value="1">流行</option>
+                <select style="width:100px;">
+                    <option value="1" selected>流行</option>
                     <option value="2">古典</option>
                     <option value="3">爵士</option>
                     <option value="4">乡村</option>
@@ -55,9 +56,8 @@
         <tr>
             <th>语种：</th>
             <td>
-                <select>
-                    <option value="0" selected>--请选择--</option>
-                    <option value="1">汉语</option>
+                <select style="width:100px;">
+                    <option value="1" selected>汉语</option>
                     <option value="2">日语</option>
                     <option value="3">英语</option>
                     <option value="4">韩语</option>
@@ -75,8 +75,8 @@
         </tr>
         <tr>
             <th colspan="2" style="text-align:center;">
-            	<br><input type="submit" value="提交">
-            	<input type="reset" value="重置">
+            	<br><input type="submit" value="提交" style="margin-left:-60px;"/>
+            	<input type="reset" value="重置" style="margin-left:30px;"/>
             </th>
         </tr>
     </table>
