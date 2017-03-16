@@ -46,12 +46,17 @@ public class Singer {
 		this.profile = profile;
 	}
 
+	public void setSingerId(int singerId) {
+		this.singerId = singerId;
+	}
+
 	public int getSingerId() {
 		return singerId;
 	}
 
 	@Override
 	public String toString() {
-		return "Singer [singerId=" + singerId + ", singerName=" + singerName + ", profile=" + profile + "]";
+		return "Singer [singerId=" + singerId + ", singerName=" + singerName
+				+ ", profile=" + profile + "]";
 	}
 }
