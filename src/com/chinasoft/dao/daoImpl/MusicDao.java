@@ -17,7 +17,7 @@ public class MusicDao {
 	 * @return (1、添加成功；0、添加失败)
 	 */
 	public int insertMusic(Music music) {
-		System.out.println("进入插入数据界面");
+		//System.out.println("进入插入数据界面");
 		String sql = "insert into music values(null, ?, ?, ?, ?, ?, ?, ?)";
 		Connection conn = Dao.Connection();
 		PreparedStatement ps = null;
@@ -28,7 +28,7 @@ public class MusicDao {
 			ps.setString(1, music.getMusicName());
 			ps.setInt(2, music.getSingerId());
 			ps.setInt(3, music.getAlbumId());
-			System.out.println(DateUtil.dateToString(music.getReleaseTime()));
+			//System.out.println("日期格式转换:" + DateUtil.dateToString(music.getReleaseTime()));
 			ps.setString(4, DateUtil.dateToString(music.getReleaseTime()));
 			ps.setInt(5, music.getLanguageId());
 			ps.setInt(6, music.getTypeId());
@@ -46,31 +46,31 @@ public class MusicDao {
 	}
 
 	/**
-	 * 根据歌手名和歌曲名查询歌曲
+	 * 根据歌手Id和歌曲名查询歌曲
 	 * 
 	 * @param musicName
 	 * @param singerName
-	 * @return (0、未查询到信息；1、查询到信息)
+	 * @return 0、未查询到信息；1、查询到信息
 	 */
-	public int selectMusicByMusicNameAndSingerName(String musicName, String singerName) {
-		String sql = "SELECT * FROM music m, singer s WHERE m.singerid = s.singerid AND m.musicname = ? AND s.singername = ?";
+	public int selectMusicByMusicNameAndSingerId(String musicName, int singerId) {
+		String sql = "SELECT * FROM music m WHERE m.musicname = ? AND m.singerId = ?";
 		Connection conn = Dao.Connection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, musicName);
-			ps.setString(2, singerName);
+			ps.setInt(2, singerId);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				return 0;
+				return 1;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			Dao.closeConn(rs, null, ps, conn);
 		}
-		return 1;
+		return 0;
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class MusicDao {
 	}
 	
 	/**
-	 * 根据歌手名查询歌手ID
+	 * 根据专辑名查询专辑ID
 	 * 
 	 * @param singerName
 	 * @return  -1：未查询到专辑信息；1~正无穷：查询到专辑信息

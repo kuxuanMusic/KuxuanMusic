@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+body table {
+	margin: 0 auto; /*水平居中*/
+	position: relative; /*脱离文档流*/
+	margin-top: 15%; /*偏移*/
+	border: 1px solid #000000;
+	border-collapse: collapse;
+}
+
+table th {
+	border: 1px solid #000000;
+}
+
+table td {
+	border: 1px solid #000000;
+}
+
+#singerName {
+	border-left: medium none;
+	border-right: medium none;
+	border-top: medium none;
+	border-bottom: 1px solid rgb(192, 192, 192)";
+}
+
+#sub {
+	text-align: center;
+	font-family: "黑体";
+}

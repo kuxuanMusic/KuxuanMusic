@@ -1,6 +1,6 @@
 package com.chinasoft.service;
 
-import com.chinasoft.dao.MVDao;
+import com.chinasoft.dao.daoImpl.MVDao;
 
 public class MVService {
 	

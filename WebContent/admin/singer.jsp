@@ -2,64 +2,27 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String str = request.getScheme() + "://" + request.getServerName()
+			+ ":" + request.getServerPort() + request.getContextPath()
+			+ "/";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>操作歌手</title>
-<link href="css/singerCenter.css" rel="stylesheet">
-<style>
-#userinfo {
-	border: 1px solid #9aa8ff;
-	border-collapse: collapse;
-}
-
-#profile {
-	width: 1100px;
-}
-
-#userinfo td {
-	border: 1px solid #9aa8ff;
-	padding: 2px;
-}
-
-#userinfo thead {
-	text-align: center;
-	background-color: #E0ECFF;
-}
-
-#userinfo tbody tr:hover {
-	background-color: #D4D4D4;
-}
-
-#userinfo tbody a:LINK, a:VISITED {
-	font-family: "黑体";
-	color: #727272;
-	text-decoration: none;
-}
-
-#userinfo tbody a:HOVER {
-	color: #400040;
-	text-decoration: underline;
-}
-</style>
-
-<script type="text/javascript">
-	function deleteSinger(singerId) {
-		var bool = confirm("确认删除");
-		if (bool) {
-			// 删除用户		
-			location.href = "SingerServlet?op=deleteSinger&singerId="
-					+ singerId;
-		}
-	}
+<link href="../css/singercss/singerCenter.css" rel="stylesheet" />
+<script type="text/javascript" src="../js/singer/singer.js">
+	
 </script>
-
+<link rel="stylesheet" type="text/css"
+	href="../js/themes/default/easyui.css" />
+<script type="text/javascript"
+	src="../jquery-easyui-1.5.1/themes/icon.css"></script>
+<script type="text/javascript"
+	src="../jquery-easyui-1.5.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="../jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
 </head>
 <body>
 	<table id="userinfo">
@@ -73,7 +36,6 @@
 		<tbody>
 			<c:forEach items="${singer}" var="singer">
 				<tr>
-					<input type="hidden" name="op" value="login" />
 					<input type="hidden" name="id" value="${singer.singerId}" />
 					<td>${singer.singerName }</td>
 					<td id="profile">${singer.profile }</td>
@@ -84,5 +46,10 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div id="pp" class="easyui-pagination"
+		style="background: #efefef; border: 1px solid #ccc;"
+		pagination:true,//分页显示 fitColumns:true,//自动适应宽度
+		autoRowHeight:true,//自动行高度
+		data-options="total:<%=request.getAttribute("count")%>,pageSize:10"></div>
 </body>
 </html>

@@ -5,10 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>酷炫音乐网后台管理系统</title>
-<link href="../Css/default.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css"
-	href="../js/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../js/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css" href="../js/themes/icon.css" />
+
+<link href="../Css/default.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min-1.2.0.js"></script>
