@@ -300,7 +300,7 @@ var _menus = {
 			"menuid" : "211",
 			"menuname" : "所有专辑",
 			"icon" : "icon-nav",
-			"url" : "#"
+			"url" : ""
 		}, {
 			"menuid" : "213",
 			"menuname" : "新增专辑",
