@@ -7,14 +7,11 @@
 <title>Insert title here</title>
 <link href="../jquery-easyui-1.5.1/themes/icon.css" rel="stylesheet"
 	type="text/css" />
-<link href="../jquery-easyui-1.5.1/themes/default/easyui.css"
-	rel="stylesheet" type="text/css" />
+<link href="../jquery-easyui-1.5.1/themes/default/easyui.css" rel="stylesheet" type="text/css" />
 
-<script type="text/javascript"
-	src="../jquery-easyui-1.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="../jquery-easyui-1.5.1/jquery.min.js"></script>
 
-<script type="text/javascript"
-	src="../jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
 
 <script src="../js/Cookie.js" type="text/javascript"></script>
 
@@ -52,10 +49,11 @@
 			type : "POST",
 			dataType : "json",
 			//cache:true,
-			url : "Service/EasyUiService.ashx?Method=Login",
+			url : "UserSrtvlet",
 			data : {
 				username : username,
-				password : password
+				password : password,
+				op : login
 			},
 			success : function(json) {
 				if (json.Flag[0].Status == 1) {

@@ -1,9 +1,11 @@
-package com.chinasoft.dao;
+package com.chinasoft.dao.daoImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.chinasoft.dao.Dao;
 
 public class MVDao {
 	/**

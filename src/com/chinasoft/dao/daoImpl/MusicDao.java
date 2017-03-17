@@ -101,7 +101,7 @@ public class MusicDao {
 	}
 	
 	/**
-	 * 根据歌手名查询歌手ID
+	 * 根据专辑名查询专辑ID
 	 * 
 	 * @param singerName
 	 * @return  -1：未查询到专辑信息；1~正无穷：查询到专辑信息

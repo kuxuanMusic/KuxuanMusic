@@ -58,7 +58,6 @@ public class MusicService {
 		MusicDao musicDao = new MusicDao();
 		// 判断歌曲是否存在（同一歌手不存在相同名字的歌）
 		int result = selectMusicByMusicNameAndSingerId(music.getMusicName(), music.getSingerId());
-		System.out.println(result);
 		if (result == 0) {
 			if (musicDao.insertMusic(music) == 1) {
 				return 1;

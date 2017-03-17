@@ -4,16 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<base href="">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../Css/default.css"/>
-<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.5.1/themes/default/easyui.css" />
-<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.5.1/themes/icon.css" />
+<%
+	String str = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath() + "/";
+%>
+<base href="<%=str%>">
+<title>添加音乐</title>
+<link rel="stylesheet" type="text/css" href="Css/default.css"/>
+<link rel="stylesheet" type="text/css" href="jquery-easyui-1.5.1/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="jquery-easyui-1.5.1/themes/icon.css" />
 
-<script type="text/javascript" src="../jquery-easyui-1.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="../jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="../jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src='../js/outlook.js'></script>
+<script type="text/javascript" src="jquery-easyui-1.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src='js/outlook.js'></script>
 <style>
         th{
             text-align: right;
@@ -21,7 +25,7 @@
 </style>
 </head>
 <body>
-	<form action="MusicServlet?op=addMusic" id="addmusic" method="post">
+	<form action="admin/MusicServlet?op=addMusic" id="addmusic" method="post">
 	<input id="op" type="text"  value="addMusic" hidden/>
     <table style="width: 600px;margin: 200px auto;">
         <tr>
