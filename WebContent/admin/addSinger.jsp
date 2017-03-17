@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String str = request.getScheme() + "://" + request.getServerName()
+			+ ":" + request.getServerPort() + request.getContextPath()
+			+ "/";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,21 +13,26 @@
 <link href="../css/singercss/addSinger.css" rel="stylesheet" />
 </head>
 <body>
-	<form action="">
+	<form action="SingerServlet?op=insertSinger" method="post">
 		<table>
 			<tr>
 				<th>歌手名</th>
-				<td id="singerName"><font face="Courier"><input
-						name="singerName" size="35"> </font></td>
+				<td><font face="Courier"> <input id="singerName"
+						name="singerName" size="38.5" placeholder="请填写歌手的名字" required>
+				</font></td>
 			</tr>
 			<tr>
 				<th>个人简介</th>
-				<td><textarea cols="40" rows="10" required>
-			</textarea></td>
+				<td><textarea name="singerProfile" cols="40" rows="10"
+						placeholder="请填写歌手的相关简介...." required></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" name="confirm"> <input
-					type="reset" name="reset"></td>
+				<td colspan="2"><span style="color: red">${msg}</span></td>
+			</tr>
+			<tr>
+				<td colspan="2" id="sub"><input type="submit" name="confirm"
+					value="提交">&nbsp;&nbsp;&nbsp; <input type="reset"
+					name="reset" value="重置"></td>
 			</tr>
 		</table>
 	</form>

@@ -84,9 +84,10 @@ public class SingerDao {
 		}
 		return count;
 	}
-	
+
 	/**
 	 * 查询歌手是否存在/可用于按名字查询歌手
+	 * 
 	 * @param name
 	 * @return boolean
 	 */
@@ -108,5 +109,30 @@ public class SingerDao {
 			Dao.closeConn(rs, null, prs, con);
 		}
 		return false;
+	}
+
+	/**
+	 * 查询歌手的数量
+	 * 
+	 * @return count
+	 */
+	public int getSingerCount() {
+		Connection con = Dao.Connection();
+		String sql = "SELECT COUNT(*) FROM singer;";
+		PreparedStatement prs = null;
+		ResultSet res = null;
+		int count = 0;
+		try {
+			prs = con.prepareStatement(sql);
+			res = prs.executeQuery();
+			while (res.next()) {
+				count = res.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dao.closeConn(res, null, prs, con);
+		}
+		return count;
 	}
 }

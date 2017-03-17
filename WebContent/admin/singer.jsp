@@ -13,7 +13,16 @@
 <title>操作歌手</title>
 <link href="../css/singercss/singerCenter.css" rel="stylesheet" />
 <script type="text/javascript" src="../js/singer/singer.js">
+	
 </script>
+<link rel="stylesheet" type="text/css"
+	href="../js/themes/default/easyui.css" />
+<script type="text/javascript"
+	src="../jquery-easyui-1.5.1/themes/icon.css"></script>
+<script type="text/javascript"
+	src="../jquery-easyui-1.5.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="../jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
 </head>
 <body>
 	<table id="userinfo">
@@ -27,7 +36,6 @@
 		<tbody>
 			<c:forEach items="${singer}" var="singer">
 				<tr>
-					<input type="hidden" name="op" value="login" />
 					<input type="hidden" name="id" value="${singer.singerId}" />
 					<td>${singer.singerName }</td>
 					<td id="profile">${singer.profile }</td>
@@ -38,5 +46,10 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div id="pp" class="easyui-pagination"
+		style="background: #efefef; border: 1px solid #ccc;"
+		pagination:true,//分页显示 fitColumns:true,//自动适应宽度
+		autoRowHeight:true,//自动行高度
+		data-options="total:<%=request.getAttribute("count")%>,pageSize:10"></div>
 </body>
 </html>
