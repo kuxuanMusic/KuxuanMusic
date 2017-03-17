@@ -12,6 +12,7 @@
 
 <script type="text/javascript" src="../jquery-easyui-1.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="../jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src='../js/outlook.js'></script>
 <style>
         th{
@@ -74,7 +75,7 @@
             <td><input type="text" id="address" name="address" required></td>
         </tr>
         <tr>
-        	<th><span>${msg}</span></th>
+        	<th colspan="2" style="text-align:center;"><span style="color:red;">${msg}</span></th>
         </tr>
         <tr>
             <th colspan="2" style="text-align:center;">
