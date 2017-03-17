@@ -1,10 +1,12 @@
 package com.chinasoft.dao.daoImpl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 
 
 import com.chinasoft.dao.Dao;
@@ -62,18 +64,17 @@ public class AlbumDao {
 		return list;
 					
 	}
-	public int insertAlbum(String name ){
+	public int insertAlbum(String name ,int language,String date,String company,int type){
 		Connection conn = Dao.Connection();
 		String sql = "insert into  values (null,?,?,?,?,?)";
-		PreparedStatement pstmt = null;
-		
+		PreparedStatement pstmt = null;		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,name);												
-			pstmt.setString(2,language);												
-			pstmt.setString(3,date);												
-			pstmt.setString(4,compapny);												
-			pstmt.setString(5,type);												
+			pstmt.setInt(2,language);			
+			pstmt.setDate(3,Date.valueOf(date));												
+			pstmt.setString(4,company);												
+			pstmt.setInt(5,type);												
 			int result = pstmt.executeUpdate();				
 			return result;
 		} catch (SQLException e) {

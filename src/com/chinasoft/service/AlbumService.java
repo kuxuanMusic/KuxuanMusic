@@ -1,15 +1,7 @@
 package com.chinasoft.service;
-
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-
 import com.chinasoft.dao.daoImpl.AlbumDao;
 import com.chinasoft.entity.Album;
-import com.css.dao.AdminDao;
-import com.css.exception.EncryptException;
-import com.css.util.Encrypt;
-
-
 
 public class AlbumService {
 	public ArrayList<Album> getAlbuminfo(){
@@ -37,19 +29,12 @@ public class AlbumService {
 		}	
 		
 	}
-	public int addAlbum(String name) {
+	public int addAlbum(String name ,int language,String date,String company,int type) {
 		// 先查询是否重名
-		AlbumDao dao = new AlbumDao();
-		int res1 = dao.selectAlbumByName(name);
-		
-		if(res1 == 1){
-			// 已存在
-			return 2;
-		} else{
-			// 未重名可插入						
-			int res2 = dao.insertAlbum(type);
-			return res2;
-		}	
+		AlbumDao dao = new AlbumDao();												
+		int res2 = dao.insertAlbum( name,language,date,company,type);
+		return res2;
+			
 		
 	}
 	
