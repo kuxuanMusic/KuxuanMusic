@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,51 +16,14 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${album}" var="album">
-	    <tr>
-	    	<input type="hidden" name="id" value="${album.albumId}"/>
-	        <td>${album.albumName}</td>
-	        <td><c:choose>
-	        		<c:when test="${album.languageId ==1}">
-	        			汉语
-	        		</c:when>
-	        		<c:when test="${album.languageId ==2}">
-	        			日语
-	        		</c:when>
-	        		<c:when test="${album.languageId ==3}">
-	        			英语
-	        		</c:when>
-	        		<c:when test="${album.languageId ==4}">
-	        			韩语
-	        		</c:when>
-	        		<c:when test="${album.languageId ==5}">
-	        			德语
-	        		</c:when>
-	        		<c:when test="${album.languageId ==6}">
-	        			法语
-	        		</c:when>
-	        		<c:when test="${album.languageId ==7}">
-	        			西班牙语
-	        		</c:when>
-	        		<c:when test="${album.languageId ==8}">
-	        			葡萄牙语
-	        		</c:when>
-	        		<c:otherwise>
-	        			印第安语
-	        		</c:otherwise>
-	        	</c:choose>	</td>	        
-	        <td>${album.releaseCompany }</td>	        
-	        <td>
-	        	<fmt:formatDate value="${releaseTime }" pattern="yyyy年MM月dd日"/>       
-	        </td>
-	         <td>${album.releaseCompany }</td>
-	        
-	        	        
-	        <td>	        
-	        	<a href="javascript:changeUser(${user.cusId})">修改</a>
+    <c:forEach items="${albumtype}" var="type">
+	    <tr>	    	
+	        <td>${type}</td>	       	        	        	        	        
+	       <!--  <td>	        
+	        	<a href="">修改</a>
 	        		&nbsp; 	        		
-	        	<a href="javascript:deleteUser(${user.cusId})">删除</a>	        
-	        </td>	        
+	        	<a href="">删除</a>	        
+	        </td> -->	        
 	    </tr>   
     </c:forEach>     
     </tbody>

@@ -90,6 +90,9 @@ public class Album {
 	public int getAlbumId() {
 		return albumId;
 	}
+	public void setAlbumId(int albumId) {
+		this.albumId = albumId;
+	}
 
 	@Override
 	public String toString() {

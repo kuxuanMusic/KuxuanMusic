@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="admin/AlbumServlet" id="addAlbum" method="post">
-	<input id="op" type="text"  value="addAlbum" hidden/>
+<form action="../AlbumServlet" id="addAlbum" method="post">
+	<input id="op" type="hidden"  value="addAlbum" />
     <table style="width: 600px;margin: 200px auto;">
           
         <tr>

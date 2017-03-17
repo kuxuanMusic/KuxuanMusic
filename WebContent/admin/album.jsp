@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="js/album/album.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -55,17 +56,32 @@
 	        			印第安语
 	        		</c:otherwise>
 	        	</c:choose>	</td>	        
-	        <td>${album.releaseCompany }</td>	        
+	        	        
 	        <td>
-	        	<fmt:formatDate value="${releaseTime }" pattern="yyyy年MM月dd日"/>       
+	        	<fmt:formatDate value="${album.releaseTime }" pattern="yyyy年MM月dd日"/>       
 	        </td>
 	         <td>${album.releaseCompany }</td>
-	        
-	        	        
+	         <td><c:choose>
+	        		<c:when test="${album.typeid ==1}">
+	        			EP
+	        		</c:when>
+	        		<c:when test="${album.typeid ==2}">
+	        			录音室专辑
+	        		</c:when>
+	        		<c:when test="${album.typeid ==3}">
+	        			合辑
+	        		</c:when>
+	        		<c:when test="${album.typeid ==4}">
+	        			精选辑
+	        		</c:when>	        		
+	        		<c:otherwise>
+	        			单曲
+	        		</c:otherwise>
+	        	</c:choose></td>	        	        	        
 	        <td>	        
-	        	<a href="javascript:changeUser(${user.cusId})">修改</a>
+	        	<a href="javascript:changeAlbum(${album.albumId})">修改</a>
 	        		&nbsp; 	        		
-	        	<a href="javascript:deleteUser(${user.cusId})">删除</a>	        
+	        	<a href="javascript:deleteAlbum(${album.albumId})">删除</a>	        
 	        </td>	        
 	    </tr>   
     </c:forEach>     

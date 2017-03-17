@@ -3,17 +3,35 @@ import java.util.ArrayList;
 import com.chinasoft.dao.daoImpl.AlbumDao;
 import com.chinasoft.entity.Album;
 
+
 public class AlbumService {
+	
 	public ArrayList<Album> getAlbuminfo(){
 		AlbumDao dao = new AlbumDao();
 		ArrayList<Album> list = dao.selectAlbumAll();	
 		return list;
 	}
+	
+	/**
+	 * 
+	 * @param 
+	 * @return 专辑类型集合
+	 * decription :查询所有的专辑类型
+	 * 
+	 */
 	public ArrayList<String> getAlbumTypeinfo(){
 		AlbumDao dao = new AlbumDao();
-		ArrayList<String> list = dao.selectAlbumType();	
+		ArrayList<String> list = dao.selectAlbumType();
+		
 		return list;
 	}
+	/**
+	 * 
+	 * @param 
+	 * @return 专辑类型集合
+	 * decription :增加专辑类型
+	 * 
+	 */
 	public int addAlbumType(String type) {
 		// 先查询是否重名
 		AlbumDao dao = new AlbumDao();
@@ -33,10 +51,30 @@ public class AlbumService {
 		// 先查询是否重名
 		AlbumDao dao = new AlbumDao();												
 		int res2 = dao.insertAlbum( name,language,date,company,type);
-		return res2;
-			
-		
+		return res2;					
+	}
+	public int removeAlbum(String albumId){
+		AlbumDao dao = new AlbumDao();
+		return dao.deleteAlbum(albumId);
+	}
+	
+	public Album changeAlbum(String albumId){
+		AlbumDao dao = new AlbumDao();
+		return dao.selectAlbumById(albumId);
+	}
+	
+	public int getCount(){
+		AlbumDao dao = new AlbumDao();
+		return dao.selectAlbumCount();
+	}
+	
+	public ArrayList<Album> getAlbumInfoFenye(int pageNo, int pageSize){
+		AlbumDao dao = new AlbumDao();
+		ArrayList<Album> list = dao.selectAlbumFenye(pageNo, pageSize);		
+		return list;
+	}
+	
+	
 	}
 	
 
-}
