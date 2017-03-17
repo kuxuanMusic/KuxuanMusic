@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import com.chinasoft.dao.Dao;
 import com.chinasoft.entity.Singer;
 
@@ -62,7 +61,13 @@ public class SingerDao {
 		return count;
 	}
 
-	public void addSinger(Singer singer) {
+	/**
+	 * 向数据库插入歌手
+	 * 
+	 * @param singer
+	 * @return count
+	 */
+	public int addSinger(Singer singer) {
 		Connection con = Dao.Connection();
 		String sql = "INSERT INTO singer VALUES(null,?,?)";
 		PreparedStatement statement = null;
@@ -77,5 +82,31 @@ public class SingerDao {
 		} finally {
 			Dao.closeConn(null, null, statement, con);
 		}
+		return count;
+	}
+	
+	/**
+	 * 查询歌手是否存在/可用于按名字查询歌手
+	 * @param name
+	 * @return boolean
+	 */
+	public boolean selectSingerByName(String name) {
+		Connection con = Dao.Connection();
+		String sql = "SELECT * FROM singer s WHERE s.singername = ?";
+		PreparedStatement prs = null;
+		ResultSet rs = null;
+		try {
+			prs = con.prepareStatement(sql);
+			prs.setString(1, name);
+			rs = prs.executeQuery();
+			while (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dao.closeConn(rs, null, prs, con);
+		}
+		return false;
 	}
 }

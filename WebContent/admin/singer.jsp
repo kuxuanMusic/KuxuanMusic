@@ -2,64 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String str = request.getScheme() + "://" + request.getServerName()
+			+ ":" + request.getServerPort() + request.getContextPath()
+			+ "/";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>操作歌手</title>
-<link href="css/singerCenter.css" rel="stylesheet">
-<style>
-#userinfo {
-	border: 1px solid #9aa8ff;
-	border-collapse: collapse;
-}
-
-#profile {
-	width: 1100px;
-}
-
-#userinfo td {
-	border: 1px solid #9aa8ff;
-	padding: 2px;
-}
-
-#userinfo thead {
-	text-align: center;
-	background-color: #E0ECFF;
-}
-
-#userinfo tbody tr:hover {
-	background-color: #D4D4D4;
-}
-
-#userinfo tbody a:LINK, a:VISITED {
-	font-family: "黑体";
-	color: #727272;
-	text-decoration: none;
-}
-
-#userinfo tbody a:HOVER {
-	color: #400040;
-	text-decoration: underline;
-}
-</style>
-
-<script type="text/javascript">
-	function deleteSinger(singerId) {
-		var bool = confirm("确认删除");
-		if (bool) {
-			// 删除用户		
-			location.href = "SingerServlet?op=deleteSinger&singerId="
-					+ singerId;
-		}
-	}
+<link href="../css/singercss/singerCenter.css" rel="stylesheet" />
+<script type="text/javascript" src="../js/singer/singer.js">
 </script>
-
 </head>
 <body>
 	<table id="userinfo">

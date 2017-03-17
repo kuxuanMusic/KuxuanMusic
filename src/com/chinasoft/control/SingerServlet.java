@@ -31,7 +31,13 @@ public class SingerServlet extends HttpServlet {
 		}
 
 	}
-
+	/**
+	 * 查询所有歌手
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	protected void Allsinger(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		SingerService service = new SingerService();
@@ -40,7 +46,13 @@ public class SingerServlet extends HttpServlet {
 		request.getRequestDispatcher("/admin/singer.jsp").forward(request,
 				response);
 	}
-
+	/**
+	 * 根据歌手id删除歌手
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	protected void deleteSinger(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String singerid = request.getParameter("singerId");
@@ -51,5 +63,8 @@ public class SingerServlet extends HttpServlet {
 		}
 		// 删除之后查询所有歌手信息
 		Allsinger(request, response);
+	}
+	protected void insertSinger(){
+		
 	}
 }

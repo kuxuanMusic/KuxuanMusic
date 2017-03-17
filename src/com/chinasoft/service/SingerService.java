@@ -28,4 +28,13 @@ public class SingerService {
 		int count = dao.deleteSinger(singerId);
 		return count;
 	}
+
+	/**
+	 * 插入歌手
+	 * @param singer
+	 */
+	public void insertSinger(Singer singer) {
+		SingerDao dao = new SingerDao();
+		dao.addSinger(singer);
+	}
 }

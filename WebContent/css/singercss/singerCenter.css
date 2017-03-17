@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+
+#userinfo {
+	border: 1px solid #9aa8ff;
+	border-collapse: collapse;
+}
+
+#profile {
+	width: 1000px;
+}
+
+#userinfo td {
+	border: 1px solid #9aa8ff;
+	padding: 2px;
+}
+
+#userinfo thead {
+	text-align: center;
+	background-color: #E0ECFF;
+}
+
+#userinfo tbody tr:hover {
+	background-color: #D4D4D4;
+}
+
+#userinfo tbody a:LINK, a:VISITED {
+	font-family: "黑体";
+	color: #727272;
+	text-decoration: none;
+}
+
+#userinfo tbody a:HOVER {
+	color: #400040;
+	text-decoration: underline;
+}
