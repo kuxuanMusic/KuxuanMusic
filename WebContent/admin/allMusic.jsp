@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,17 +14,15 @@
 <base href="<%=str%>">
 <title>用户管理</title>
 <link rel="stylesheet" type="text/css"
-	href="jquery-easyui-1.4.5/themes/default/easyui.css">
+	href="jquery-easyui-1.5.1/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
-	href="jquery-easyui-1.4.5/themes/icon.css">
+	href="jquery-easyui-1.5.1/themes/icon.css">
+<script type="text/javascript" src="jquery-easyui-1.5.1/jquery.min.js"></script>
 <script type="text/javascript"
-	src="jquery-easyui-1.4.5/jquery.min.js"></script>
+	src="jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
 <script type="text/javascript"
-	src="jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
-<script type="text/javascript"
-	src="jquery-easyui-1.4.5/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript"
-	src="js/common.js"></script>
+	src="jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript">
 	var noticeauthor = '${adminUser.adminname}';
 	var url;
@@ -56,8 +55,7 @@
 		var row = selectedRows[0];
 		$("#dlg").dialog("open").dialog("setTitle", "编辑公告信息");
 		$("#fm").form("load", row);
-		url = "Notice/save.do?noticeid="
-				+ row.noticeid;
+		url = "Notice/save.do?noticeid=" + row.noticeid;
 	}
 
 	//保存
@@ -89,7 +87,7 @@
 		$("#noticeauthor").val("");
 		$("#noticecontent").val("");
 		$("#noticetime").val("");
-	}
+	} 
 
 	//关闭
 	function closeSaleChanceDialog() {
@@ -99,24 +97,42 @@
 </script>
 
 <title>Insert title here</title>
+
+<script type="text/javascript">
+	
+</script>
 </head>
 <body style="margin: 1px">
 	<table id="dg" title="公告管理" class="easyui-datagrid" fitColumns="true"
-		pagination="true" rownumbers="true"
-		url="Notice/list.do" fit="true"
+		pagination="true" rownumbers="true" url="Notice/list.do" fit="true"
 		toolbar="#tb">
 		<thead>
 			<tr>
 				<th field="cb" checkbox="true" align="center"></th>
-				<th field="noticeid" width="5%" align="center">编号</th>
-				<th field="noticetype" width="10%" align="center">公告类型</th>
-				<th field="noticetitle" width="15%" align="center">公告标题</th>
-				<th field="noticeauthor" width="10%" align="center">发布人</th>
-				<th field="noticecontent" width="40%" align="center">发布内容</th>
-				<th field="noticetime" width="15%" align="center">发布时间</th>
+				<th field="musicid" width="5%" align="center">歌曲编号</th>
+				<th field="musicname" width="15%" align="center">歌曲名</th>
+				<th field="singername" width="15%" align="center">歌手名</th>
+				<th field="albumname" width="15%" align="center">专辑名</th>
+				<th field="releasetime" width="10%" align="center">发布时间</th>
+				<th field="languagename" width="5%" align="center">语种</th>
+				<th field="typename" width="5%" align="center">类型</th>
+				<th field="address" width="20%" align="center">歌曲存放地址</th>
 			</tr>
 		</thead>
+		<tbody>
+			<c:forEach items="${musicSingerAndAlbum}"  var="music">
+				<td><c:out value="${ music.musicId }"></c:out></td>
+				<td><c:out value="${ music.musicName}"></c:out></td>
+				<td><c:out value="${ music.singerName}"></c:out></td>
+				<td><c:out value="${ music.albumName}"></c:out></td>
+				<td><c:out value="${ music.releasetime}"></c:out></td>
+				<td><c:out value="${ music.languageName}"></c:out></td>
+				<td><c:out value="${ music.typeName}"></c:out></td>
+				<td><c:out value="${ music.address}"></c:out></td>
+			</c:forEach>
+		</tbody>
 	</table>
+	<div id="pp" class="easyui-pagination" data-options="total:2000,pageSize:10" style="background:#efefef;border:1px solid #ccc;"></div>
 	<div id="tb">
 		<div>
 			<a href="javascript:openSaleChanceAddDialog()"
@@ -128,8 +144,8 @@
 			&nbsp;公告编号：&nbsp;<input type="text" id="s_noticeid" size="20"
 				onkeydown="if(event.keyCode==13) searchSaleChance()" />
 			&nbsp;公告类型：&nbsp;
-			<!-- <input type="text" id="s_noticetype" size="20"
-				onkeydown="if(event.keyCode==13) searchSaleChance()" /> -->
+			<input type="text" id="s_noticetype" size="20"
+				onkeydown="if(event.keyCode==13) searchSaleChance()" />
 			<select class="easyui-combobox" id="s_noticetype" editable="false"
 				panelHeight="auto">
 				<option value="">请选择...</option>
@@ -143,7 +159,7 @@
 				iconCls="icon-search" plain="true">搜索</a>
 		</div>
 	</div>
-
+	
 	<div id="dlg" class="easyui-dialog"
 		style="width: 500px; height: 450px; padding: 10px 20px" closed="true"
 		buttons="#dlg-buttons">
@@ -186,7 +202,7 @@
 			</table>
 		</form>
 	</div>
-
+	
 	<div id="dlg-buttons">
 		<a href="javascript:saveSaleChance()" class="easyui-linkbutton"
 			iconCls="icon-ok">保存</a> <a href="javascript:closeSaleChanceDialog()"

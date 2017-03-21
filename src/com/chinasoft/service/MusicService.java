@@ -1,7 +1,10 @@
 package com.chinasoft.service;
 
+import java.util.ArrayList;
+
 import com.chinasoft.dao.daoImpl.MusicDao;
 import com.chinasoft.entity.Music;
+import com.chinasoft.entity.MusicSingerAndAlbum;
 
 /**
  * 歌曲服务类
@@ -67,5 +70,15 @@ public class MusicService {
 		} else {
 			return 2;
 		}
+	}
+	
+	/**
+	 * 查询所有歌曲信息（用于后台歌曲信息展示）
+	 * 
+	 * @return ArrayList<MusicSingerAndAlbum>
+	 */
+	public ArrayList<MusicSingerAndAlbum> selectAllMusic(){
+		MusicDao musicDao = new MusicDao();
+		return musicDao.selectAllMusic();
 	}
 }
