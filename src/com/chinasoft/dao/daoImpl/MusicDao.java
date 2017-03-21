@@ -140,9 +140,7 @@ public class MusicDao {
 	 * @return
 	 */
 	public ArrayList<MusicSingerAndAlbum> selectAllMusic() {
-		String sql = "select m.musicid, m.musicname, s.singername, a.albumname, m.releasetime, name, mt.typename, m.adderss "
-				+ "from music m, singer s, `language` l, musictype mt, album a " + "where m.singerid = s.singerid "
-				+ "and m.albumid = a.albumid " + "and m.languageid = l.id " + "and m.typeid = mt.typeid";
+		String sql = "select m.musicid, m.musicname, s.singername, a.albumname, m.releasetime, name, mt.typename, m.adderss from music m, singer s, `language` l, musictype mt, album a where m.singerid = s.singerid and m.albumid = a.albumid and m.languageid = l.id and m.typeid = mt.typeid limit 0,10";
 		Connection conn = Dao.Connection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -156,7 +154,7 @@ public class MusicDao {
 				msa.setMusicName(rs.getString("m.musicname"));
 				msa.setSingerName(rs.getString("s.singername"));
 				msa.setAlbumName(rs.getString("a.albumname"));
-				msa.setReleaseTime(rs.getDate("m.releasetime"));
+				msa.setReleaseTime(rs.getString("m.releasetime"));
 				msa.setLanguageName(rs.getString("name"));
 				msa.setTypeName(rs.getString("mt.typename"));
 				msa.setAddress(rs.getString("m.adderss"));

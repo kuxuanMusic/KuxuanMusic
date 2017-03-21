@@ -22,7 +22,7 @@ public class MusicSingerAndAlbum {
 	/**
 	 * 歌曲发布时间
 	 */
-	private Date releaseTime;
+	private String releaseTime;
 	/**
 	 * 语种
 	 */
@@ -40,7 +40,7 @@ public class MusicSingerAndAlbum {
 		super();
 	}
 
-	public MusicSingerAndAlbum(int musicId, String musicName, String singerName, String albumName, Date releaseTime,
+	public MusicSingerAndAlbum(int musicId, String musicName, String singerName, String albumName, String releaseTime,
 			String languageName, String typeName, String address) {
 		super();
 		this.musicId = musicId;
@@ -85,11 +85,11 @@ public class MusicSingerAndAlbum {
 		this.albumName = albumName;
 	}
 
-	public Date getReleaseTime() {
+	public String getReleaseTime() {
 		return releaseTime;
 	}
 
-	public void setReleaseTime(Date releaseTime) {
+	public void setReleaseTime(String releaseTime) {
 		this.releaseTime = releaseTime;
 	}
 

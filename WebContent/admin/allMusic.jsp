@@ -120,15 +120,18 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${musicSingerAndAlbum}"  var="music">
-				<td><c:out value="${ music.musicId }"></c:out></td>
-				<td><c:out value="${ music.musicName}"></c:out></td>
-				<td><c:out value="${ music.singerName}"></c:out></td>
-				<td><c:out value="${ music.albumName}"></c:out></td>
-				<td><c:out value="${ music.releasetime}"></c:out></td>
-				<td><c:out value="${ music.languageName}"></c:out></td>
-				<td><c:out value="${ music.typeName}"></c:out></td>
-				<td><c:out value="${ music.address}"></c:out></td>
+			<c:forEach items="${musicSingerAndAlbum}"  var="msa" begin="0" end="9">
+			<tr>
+				<td>&nbsp;</td>
+				<td><c:out value="${ msa.musicId }"></c:out></td>
+				<td><c:out value="${ msa.musicName}"></c:out></td>
+				<td><c:out value="${ msa.singerName}"></c:out></td>
+				<td><c:out value="${ msa.albumName}"></c:out></td>
+				<td><c:out value="${ msa.releaseTime}"></c:out></td>
+				<td><c:out value="${ msa.languageName}"></c:out></td>
+				<td><c:out value="${ msa.typeName}"></c:out></td>
+				<td><c:out value="${ msa.address}"></c:out></td>
+			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
