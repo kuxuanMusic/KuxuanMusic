@@ -87,7 +87,7 @@
 		$("#noticeauthor").val("");
 		$("#noticecontent").val("");
 		$("#noticetime").val("");
-	} 
+	}
 
 	//关闭
 	function closeSaleChanceDialog() {
@@ -120,22 +120,24 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${musicSingerAndAlbum}"  var="msa" begin="0" end="9">
-			<tr>
-				<td>&nbsp;</td>
-				<td><c:out value="${ msa.musicId }"></c:out></td>
-				<td><c:out value="${ msa.musicName}"></c:out></td>
-				<td><c:out value="${ msa.singerName}"></c:out></td>
-				<td><c:out value="${ msa.albumName}"></c:out></td>
-				<td><c:out value="${ msa.releaseTime}"></c:out></td>
-				<td><c:out value="${ msa.languageName}"></c:out></td>
-				<td><c:out value="${ msa.typeName}"></c:out></td>
-				<td><c:out value="${ msa.address}"></c:out></td>
-			</tr>
+			<c:forEach items="${musicSingerAndAlbum}" var="msa" begin="0" end="9">
+				<tr>
+					<td>&nbsp;</td>
+					<td><c:out value="${ msa.musicId }"></c:out></td>
+					<td><c:out value="${ msa.musicName}"></c:out></td>
+					<td><c:out value="${ msa.singerName}"></c:out></td>
+					<td><c:out value="${ msa.albumName}"></c:out></td>
+					<td><c:out value="${ msa.releaseTime}"></c:out></td>
+					<td><c:out value="${ msa.languageName}"></c:out></td>
+					<td><c:out value="${ msa.typeName}"></c:out></td>
+					<td><c:out value="${ msa.address}"></c:out></td>
+				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<div id="pp" class="easyui-pagination" data-options="total:2000,pageSize:10" style="background:#efefef;border:1px solid #ccc;"></div>
+	<div id="pp" class="easyui-pagination"
+		data-options="total:2000,pageSize:10"
+		style="background: #efefef; border: 1px solid #ccc;"></div>
 	<div id="tb">
 		<div>
 			<a href="javascript:openSaleChanceAddDialog()"
@@ -146,10 +148,9 @@
 		<div>
 			&nbsp;公告编号：&nbsp;<input type="text" id="s_noticeid" size="20"
 				onkeydown="if(event.keyCode==13) searchSaleChance()" />
-			&nbsp;公告类型：&nbsp;
-			<input type="text" id="s_noticetype" size="20"
-				onkeydown="if(event.keyCode==13) searchSaleChance()" />
-			<select class="easyui-combobox" id="s_noticetype" editable="false"
+			&nbsp;公告类型：&nbsp; <input type="text" id="s_noticetype" size="20"
+				onkeydown="if(event.keyCode==13) searchSaleChance()" /> <select
+				class="easyui-combobox" id="s_noticetype" editable="false"
 				panelHeight="auto">
 				<option value="">请选择...</option>
 				<option value="新闻">新闻</option>
@@ -162,7 +163,7 @@
 				iconCls="icon-search" plain="true">搜索</a>
 		</div>
 	</div>
-	
+
 	<div id="dlg" class="easyui-dialog"
 		style="width: 500px; height: 450px; padding: 10px 20px" closed="true"
 		buttons="#dlg-buttons">
@@ -173,39 +174,69 @@
 					<td>带<font color="red">*</font>为必填项
 					</td>
 				</tr>
-				<tr>
-					<td><font color="red">*</font>公告类型</td>
-					<td><select class="easyui-combobox" id="noticetype"
-						editable="false" panelHeight="auto" name="noticetype">
-							<option value="新闻">新闻</option>
-							<option value="通知">通知</option>
-					</select></td>
+				<tr hidden>
+					<td><font color="red">*</font>歌曲ID</td>
+					<td><input type="text" id="musicid" name="musicid" value=""
+						readonly /></td>
 				</tr>
 				<tr>
-					<td><font color="red">*</font>公告标题</td>
-					<td><input type="text" id="noticetitle" name="noticetitle"
-						class="easyui-validatebox" required="true" /></td>
+					<td><font color="red">*</font>歌曲名</td>
+					<td><input type="text" id="musicname" name="musicname"
+						class="easyui-validatebox" required /></td>
 
 				</tr>
-				<tr hidden="true">
-					<td><font color="red">*</font>发布人</td>
-					<td><input type="text" id="noticeauthor" name="noticeauthor" /></td>
+				<tr>
+					<td><font color="red">*</font>歌手名</td>
+					<td><input type="text" id="singername" name="singername"
+						class="easyui-validatebox" required /></td>
 				</tr>
 				<tr>
-					<td><font color="red">*</font>发布内容</td>
-					<td colspan="4"><textarea id="noticecontent"
-							name="noticecontent" style="width: 300px; height: 100px;"
-							class="easyui-validatebox" required="true"></textarea></td>
+					<td><font color="red">*</font>专辑名</td>
+					<td><input type="text" id="albumname" name="albumname"
+						class="easyui-validatebox" required /></td>
 				</tr>
 				<tr>
 					<td><font color="red">*</font>发布时间</td>
-					<td><input type="datetime" id="noticetime" name="noticetime"
-						class="easyui-validatebox" />
+					<td><input id="dd" type="text" class="easyui-datebox"
+						id="releasetime" name="releasetime" required></td>
+				</tr>
+				<tr>
+					<th>歌曲类型：</th>
+					<td><select style="width: 100px;" id="musictype"
+						name="musictype">
+							<option value="1" selected>流行</option>
+							<option value="2">古典</option>
+							<option value="3">爵士</option>
+							<option value="4">乡村</option>
+							<option value="5">嘻哈</option>
+							<option value="6">摇滚</option>
+							<option value="7">轻音乐</option>
+					</select></td>
+				</tr>
+				<tr>
+					<th>语种：</th>
+					<td><select style="width: 100px;" id="language"
+						name="language">
+							<option value="1" selected>汉语</option>
+							<option value="2">日语</option>
+							<option value="3">英语</option>
+							<option value="4">韩语</option>
+							<option value="5">德语</option>
+							<option value="6">法语</option>
+							<option value="7">西班牙语</option>
+							<option value="8">葡萄牙语</option>
+							<option value="9">印第安语</option>
+					</select></td>
+				</tr>
+				<tr>
+					<th>存放地址：</th>
+					<td><input type="text" id="address" name="address"
+						class="easyui-validatebox" required></td>
 				</tr>
 			</table>
 		</form>
 	</div>
-	
+
 	<div id="dlg-buttons">
 		<a href="javascript:saveSaleChance()" class="easyui-linkbutton"
 			iconCls="icon-ok">保存</a> <a href="javascript:closeSaleChanceDialog()"
