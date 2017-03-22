@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="js/album/albumType.js"></script>
 </head>
 <body>
 <table id="albumTypeinfo">
@@ -16,14 +17,9 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${albumtype}" var="type">
+    <c:forEach items="${pm.list}" var="type">
 	    <tr>	    	
-	        <td>${type}</td>	       	        	        	        	        
-	       <!--  <td>	        
-	        	<a href="">修改</a>
-	        		&nbsp; 	        		
-	        	<a href="">删除</a>	        
-	        </td> -->	        
+	        <td>${type}</td>	       	        	        	        	        	     	        
 	    </tr>   
     </c:forEach>     
     </tbody>

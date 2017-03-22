@@ -2,6 +2,7 @@ package com.chinasoft.service;
 import java.util.ArrayList;
 import com.chinasoft.dao.daoImpl.AlbumDao;
 import com.chinasoft.entity.Album;
+import com.chinasoft.util.PageModel;
 
 
 public class AlbumService {
@@ -59,6 +60,7 @@ public class AlbumService {
 	}
 	
 	public Album changeAlbum(String albumId){
+		
 		AlbumDao dao = new AlbumDao();
 		return dao.selectAlbumById(albumId);
 	}
@@ -68,10 +70,23 @@ public class AlbumService {
 		return dao.selectAlbumCount();
 	}
 	
-	public ArrayList<Album> getAlbumInfoFenye(int pageNo, int pageSize){
+	public PageModel getAlbumInfoFenye(int pageNo, int pageSize){
 		AlbumDao dao = new AlbumDao();
-		ArrayList<Album> list = dao.selectAlbumFenye(pageNo, pageSize);		
-		return list;
+		PageModel pm = dao.selectAlbumFenyeNew(pageNo, pageSize);		
+		return pm;
+	}
+
+	public int uppdateAlbum(int id, String name, int language, String date, String company, int type) {		
+		AlbumDao dao = new AlbumDao();												
+		int res2 = dao.updateAlbum(id, name,language,date,company,type);
+		return res2;
+	}
+
+	public PageModel getAlbumTypeInfoFenye(int pageNo, int pageSize) {
+		
+		AlbumDao dao = new AlbumDao();
+		PageModel pm = dao.selectAlbumTypeFenyeNew(pageNo, pageSize);		
+		return pm;
 	}
 	
 	

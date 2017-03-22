@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.chinasoft.entity.Album;
 import com.chinasoft.service.AlbumService;
+import com.chinasoft.util.PageModel;
+
 
 
 
@@ -33,25 +35,29 @@ public class AlbumServlet extends HttpServlet {
 		doPost(request, response);
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("1");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		request.setCharacterEncoding("utf-8");
 		String op = request.getParameter("op");
+		System.out.println(op);
+		String albumId = request.getParameter("albumId");
+		System.out.println(albumId);		
 		if ("addAlbum".equals(op)) {
 			addAlbum(request, response);
 		} else if ("addAlbumType".equals(op)) {
 			addAlbumType(request, response);
-		}else if ("albuminfo".equals(op)) {
-			albuminfo(request, response);
-		}else if ("albumTypeinfo".equals(op)) {
-			albumTypeinfo(request, response);
-		}
-		else if ("deleteAlbum".equals(op)){
-			deleteAlbum(request, response);
-		}
+		}		
 		else if ("changeAlbum".equals(op)){
 			changeAlbum(request, response);
 		}
-//		albumTypeinfo(request, response);
+		else if ("updateAlbum".equals(op)){
+			updateAlbum(request, response);
+		}else if("albuminfoFenye".equals(op)){
+			albuminfoFenye(request, response);
+		}
+		else if("albumTypeinfoFenye".equals(op)){
+			albumTypeinfoFenye(request, response);
+		}
+
 		
 	}
 	/**	 
@@ -85,17 +91,18 @@ public class AlbumServlet extends HttpServlet {
 	 */
 
 	protected void addAlbumType(HttpServletRequest request, HttpServletResponse response) {
-		// 获取页面参数
-		
-				String type = request.getParameter("type");				
+		// 获取页面参数		
+				String type = request.getParameter("type");	
+				System.out.println(type);
 				// 调用service处理新增业务
 				AlbumService service = new AlbumService();
 				int res = 3;				
 				res = service.addAlbumType(type);				
 				if (res == 1) {					
 					//新增成功
+					request.setAttribute("msg", "新增成功");
 					try {
-						response.sendRedirect("/albumType.jsp");
+						response.sendRedirect("/admin/addAlbumType.jsp");
 					} catch (IOException e) {
 						
 						e.printStackTrace();
@@ -135,21 +142,25 @@ public class AlbumServlet extends HttpServlet {
 
 	protected void addAlbum(HttpServletRequest request, HttpServletResponse response) {
 		// 获取页面参数
-		System.out.println("2");
+		
 		String name = request.getParameter("name");				
 		String date = request.getParameter("date");				
 		String company = request.getParameter("company");				
 		int type = toInt(request.getParameter("type"));				
 		int language = toInt(request.getParameter("language"));
-		System.out.println(name);
+		
 		// 调用service处理新增业务
 		AlbumService service = new AlbumService();
 		int res = 3;				
-		res = service.addAlbum(name,language,date,company, type);				
+		res = service.addAlbum(name,language,date,company, type);		
 		if (res == 1) {					
 			//新增成功
+			request.setAttribute("msg", "新增成功");
 			try {
-				response.sendRedirect("/addAlbum.jsp");
+				request.getRequestDispatcher("/admin/addAlbum.jsp").forward(request, response);
+			} catch (ServletException e) {
+				
+				e.printStackTrace();
 			} catch (IOException e) {
 				
 				e.printStackTrace();
@@ -158,7 +169,7 @@ public class AlbumServlet extends HttpServlet {
 		} else {
 			request.setAttribute("msg", "新增失败");
 			try {
-				request.getRequestDispatcher("/addAlbum.jsp").forward(request, response);
+				request.getRequestDispatcher("/admin/addAlbum.jsp").forward(request, response);
 			} catch (ServletException e) {
 				
 				e.printStackTrace();
@@ -170,34 +181,102 @@ public class AlbumServlet extends HttpServlet {
 		
 	}
 	
-	/**	 
-	 * decription :删除专辑	 
-	 */
-	protected void deleteAlbum(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// 删除专辑
-		String albumId = request.getParameter("albumId");
-		AlbumService as = new AlbumService();
-		int reuslt = as.removeAlbum(albumId);		
-		String pageNo = request.getParameter("pageNo");
-		String pageSize = request.getParameter("pageSize");		
-		request.getRequestDispatcher("/admin/album?op=albuminfoFenye&pageNo=" + pageNo + "&pageSize" + pageSize).forward(request, response);
 
+	
+	protected void updateAlbum(HttpServletRequest request, HttpServletResponse response) {
+		// 获取页面参数
+		int id=toInt(request.getParameter("id"));
+		String name = request.getParameter("name");				
+		String date = request.getParameter("date");				
+		String company = request.getParameter("company");				
+		int type = toInt(request.getParameter("type"));				
+		int language = toInt(request.getParameter("language"));				
+		AlbumService service = new AlbumService();
+		int res = 3;				
+		res = service.uppdateAlbum(id,name,language,date,company, type);		
+		if (res == 1) {								
+			request.setAttribute("msg", "修改成功");
+			try {
+				request.getRequestDispatcher("/admin/updateAlbum.jsp").forward(request, response);
+			} catch (ServletException e) {
+				
+				e.printStackTrace();
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		
+		} else {
+			request.setAttribute("msg", "修改失败");
+			try {
+				request.getRequestDispatcher("/admin/updateAlbum.jsp").forward(request, response);
+			} catch (ServletException e) {				
+				e.printStackTrace();
+			} catch (IOException e) {				
+				e.printStackTrace();
+			}
+		}		
+	}
+	protected void albuminfoFenye(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {		
+		// 每页多少条数据
+		int pageSize = 0;		
+		// 当前是第几页
+		int pageNo = 0;	
+			
+		// 当前页
+		pageNo = Integer.valueOf(request.getParameter("pageNo"));
+		pageSize = Integer.valueOf(request.getParameter("pageSize"));		
+		AlbumService cs = new AlbumService();
+		PageModel pm = cs.getAlbumInfoFenye(pageNo, pageSize);
+		
+		request.setAttribute("pm", pm);
+		request.getRequestDispatcher("/admin/album.jsp").forward(request, response);
+	}
+	protected void albumTypeinfoFenye(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {		
+		// 每页多少条数据
+		int pageSize = 0;		
+		// 当前是第几页
+		int pageNo = 0;	
+			
+		// 当前页
+		pageNo = Integer.valueOf(request.getParameter("pageNo"));
+		pageSize = Integer.valueOf(request.getParameter("pageSize"));		
+		AlbumService cs = new AlbumService();
+		PageModel pm = cs.getAlbumTypeInfoFenye(pageNo, pageSize);
+		System.out.println(pm.getList());		
+		request.setAttribute("pm", pm);
+		request.getRequestDispatcher("/admin/albumType.jsp").forward(request, response);
 	}
 	
+
 	/**	 
 	 * decription :更改专辑	 
 	 */
 
 	protected void changeAlbum(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		String albumId = request.getParameter("albumId");
+			throws ServletException, IOException {		
+		String albumId = request.getParameter("albumId");		
 		AlbumService as = new AlbumService();
-		Album al = as.changeAlbum(albumId);
+		Album al = as.changeAlbum(albumId);				
 		request.setAttribute("al", al);
-
-		request.getRequestDispatcher("").forward(request, response);
+		request.getRequestDispatcher("/admin/updateAlbum.jsp").forward(request, response);
 	}
+	/**	 
+	 * decription :删除专辑	 
+	 */
+//	protected void deleteAlbum(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//		// 删除专辑
+//		String albumId = request.getParameter("albumId");
+//		AlbumService as = new AlbumService();
+//		int reuslt = as.removeAlbum(albumId);		
+//		String pageNo = request.getParameter("pageNo");
+//		String pageSize = request.getParameter("pageSize");
+//		albuminfoFenye(request, response);
+//		request.getRequestDispatcher("/admin/album?op=albuminfoFenye&pageNo=" + pageNo + "&pageSize" + pageSize).forward(request, response);
+//
+//	}
 
 }

@@ -5,15 +5,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%
+	String str = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
+%>
+<base href="<%=str%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="js/album/album.js"></script>
+
 <title>Insert title here</title>
 </head>
 <body>
-<table id="userinfo">
+<table id="userinfo" >
 
     <thead>
     <tr>
+    	<td>专辑id</td>
         <td>专辑名</td>
         <td>语种</td>
         <td>发行时间</td>
@@ -23,9 +29,10 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${album}" var="album">
+    <c:forEach items="${pm.list}" var="album">
 	    <tr>
 	    	<input type="hidden" name="id" value="${album.albumId}"/>
+	    	<td>${album.albumId}</td>
 	        <td>${album.albumName}</td>
 	        <td><c:choose>
 	        		<c:when test="${album.languageId ==1}">
@@ -80,8 +87,7 @@
 	        	</c:choose></td>	        	        	        
 	        <td>	        
 	        	<a href="javascript:changeAlbum(${album.albumId})">修改</a>
-	        		&nbsp; 	        		
-	        	<a href="javascript:deleteAlbum(${album.albumId})">删除</a>	        
+	        	        
 	        </td>	        
 	    </tr>   
     </c:forEach>     

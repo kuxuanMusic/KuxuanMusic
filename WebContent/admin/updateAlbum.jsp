@@ -1,28 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>       
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%
+	String str = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
+%>
+<base href="<%=str%>">
 <title>Insert title here</title>
 </head>
 <body>
-<form action="../AlbumServlet" id="addAlbum" method="post">
-	<input name="op" type="hidden"  value="addAlbum" />
-    <table style="width: 600px;margin: 200px auto;">
-    
-        <tr> <td colspan="2" style="text-align:center;">${msg}</td></tr>
-        <tr>
+<form action="AlbumServlet" id="updateAlbum" method="post">
+	<input name="op" type="hidden"  value="updateAlbum" />
+    <table style="width: 600px;margin: 200px auto;">    	 
+         <tr><input type="hidden" name="id" value="${al.albumId}"/></tr>
+         <tr> <td>${msg}</td></tr> 
+        <tr>        	
             <th>专辑名：</th>
-            <td><input type="text" name="name"></td>
+            <td><input type="text" name="name" value="${al.albumName}"></td>
         </tr>
         <tr>
             <th>发行时间：</th>
-            <td><input id="dd" type="text" name="date" class="easyui-datebox" required> </td>
+            
+            <td><input type="text" name="date" value="${al.releaseTime}"></td>
         </tr>
          <tr>
             <th>发行公司：</th>
-            <td><input type="text" name="company" ></td>
+            <td><input type="text" name="company" value="${al.releaseCompany }" ></td>
         </tr>
         <tr>
             <th>类型：</th>
@@ -57,11 +65,10 @@
         <tr>
             <th colspan="2" style="text-align:center;">
             	<br><input type="submit" value="提交" style="margin-left:-60px;"/>
-            	<input type="reset" value="重置" style="margin-left:30px;"/>
+            	
             </th>
         </tr>
     </table>
 </form>
-
 </body>
 </html>

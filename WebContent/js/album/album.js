@@ -1,31 +1,37 @@
 /**
  * 
  */
-function deleteAlbum(albumId){
+/*function deleteAlbum(albumId){
+	
 	var pageNo = document.getElementById("pageNo").value;
 	var pageSize = document.getElementById("pageSize").value;	
 	var bool = confirm("确认删除");
-	//alert(cusId);
+	alert(albumId);
+	alert(pageNo);
+	alert(pageSize);
 	if(bool){
 		// 删除专辑		
-		location.href="admin/album?op=deleteAlbum&albumId=" +albumId + "&pageNo=" + pageNo + "&pageSize=" + pageSize;		
+		location.href="AlbumServlet?op=deleteAlbum&albumId=" +albumId ;		
 	}	
-}
+}*/
 
-function changeAlbum(allbumId ){
-	location.href="admin/album?op=changeAlbum&cusId=" + allbumId ;
+function changeAlbum(albumId ){
+	alert(albumId);
+	location.href="AlbumServlet?op=changeAlbum&albumId=" +albumId ;
+		
 }
 
 function toPage(no){
+	alert(no);
 	var pageSize = document.getElementById("pageSize").value;
-	location.href="admin/album?op=albuminfoFenye&pageNo=" + no + "&pageSize=" + pageSize;
+	location.href="AlbumServlet?op=albuminfoFenye&pageNo=" + no + "&pageSize=" + pageSize;
 }
 
 function changePageNo(e){
 	var pageNo = document.getElementById("pageNo").value;
 	var pageSize = document.getElementById("pageSize").value;	
 	if(e.keyCode==13){
-		location.href="admin/album?op=albuminfoFenye&pageNo=" + pageNo + "&pageSize=" + pageSize;		
+		location.href="AlbumServlet?op=albuminfoFenye&pageNo=" + no + "&pageSize=" + pageSize;		
 	}
 }
 
