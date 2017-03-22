@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="../css/album/albumall.css" rel="stylesheet" />
 </head>
 <body>
 <form action="../AlbumServlet" id="addAlbum" method="post">

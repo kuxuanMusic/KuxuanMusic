@@ -3,21 +3,21 @@ package com.chinasoft.util;
 import java.util.ArrayList;
 
 public class PageModel {
-	// ���ж���������
+	
 	private int count = 0;
-	// ÿҳ����������
+
 	private int pageSize = 0;
-	// ��ǰ�ǵڼ�ҳ
+
 	private int pageNo = 0;
-	// ��һҳ
+	
 	private int pagePre = 0;
-	// ��һҳ
+
 	private int pageNext = 0;
-	// ��һҳ
+
 	private int pageFirst = 0;
-	// βҳ
+
 	private int pageLast = 0;
-	// ��ҳ����
+
 	private ArrayList list;
 
 	public int getCount() {
