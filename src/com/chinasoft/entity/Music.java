@@ -25,9 +25,21 @@ public class Music {
 	 * 专辑ID
 	 */
 	private int albumId;
+	/**
+	 * 歌曲发布时间
+	 */
 	private Date releaseTime;
+	/**
+	 * 语种
+	 */
 	private int languageId;
+	/**
+	 * 类型
+	 */
 	private int typeId;
+	/**
+	 * 歌曲存放地址
+	 */
 	private String address;
 
 	public Music() {

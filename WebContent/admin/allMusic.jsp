@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,17 +14,15 @@
 <base href="<%=str%>">
 <title>用户管理</title>
 <link rel="stylesheet" type="text/css"
-	href="jquery-easyui-1.4.5/themes/default/easyui.css">
+	href="jquery-easyui-1.5.1/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
-	href="jquery-easyui-1.4.5/themes/icon.css">
+	href="jquery-easyui-1.5.1/themes/icon.css">
+<script type="text/javascript" src="jquery-easyui-1.5.1/jquery.min.js"></script>
 <script type="text/javascript"
-	src="jquery-easyui-1.4.5/jquery.min.js"></script>
+	src="jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
 <script type="text/javascript"
-	src="jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
-<script type="text/javascript"
-	src="jquery-easyui-1.4.5/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript"
-	src="js/common.js"></script>
+	src="jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript">
 	var noticeauthor = '${adminUser.adminname}';
 	var url;
@@ -56,8 +55,7 @@
 		var row = selectedRows[0];
 		$("#dlg").dialog("open").dialog("setTitle", "编辑公告信息");
 		$("#fm").form("load", row);
-		url = "Notice/save.do?noticeid="
-				+ row.noticeid;
+		url = "Notice/save.do?noticeid=" + row.noticeid;
 	}
 
 	//保存
@@ -99,24 +97,47 @@
 </script>
 
 <title>Insert title here</title>
+
+<script type="text/javascript">
+	
+</script>
 </head>
 <body style="margin: 1px">
 	<table id="dg" title="公告管理" class="easyui-datagrid" fitColumns="true"
-		pagination="true" rownumbers="true"
-		url="Notice/list.do" fit="true"
+		pagination="true" rownumbers="true" url="Notice/list.do" fit="true"
 		toolbar="#tb">
 		<thead>
 			<tr>
 				<th field="cb" checkbox="true" align="center"></th>
-				<th field="noticeid" width="5%" align="center">编号</th>
-				<th field="noticetype" width="10%" align="center">公告类型</th>
-				<th field="noticetitle" width="15%" align="center">公告标题</th>
-				<th field="noticeauthor" width="10%" align="center">发布人</th>
-				<th field="noticecontent" width="40%" align="center">发布内容</th>
-				<th field="noticetime" width="15%" align="center">发布时间</th>
+				<th field="musicid" width="5%" align="center">歌曲编号</th>
+				<th field="musicname" width="15%" align="center">歌曲名</th>
+				<th field="singername" width="15%" align="center">歌手名</th>
+				<th field="albumname" width="15%" align="center">专辑名</th>
+				<th field="releasetime" width="10%" align="center">发布时间</th>
+				<th field="languagename" width="5%" align="center">语种</th>
+				<th field="typename" width="5%" align="center">类型</th>
+				<th field="address" width="20%" align="center">歌曲存放地址</th>
 			</tr>
 		</thead>
+		<tbody>
+			<c:forEach items="${musicSingerAndAlbum}" var="msa" begin="0" end="9">
+				<tr>
+					<td>&nbsp;</td>
+					<td><c:out value="${ msa.musicId }"></c:out></td>
+					<td><c:out value="${ msa.musicName}"></c:out></td>
+					<td><c:out value="${ msa.singerName}"></c:out></td>
+					<td><c:out value="${ msa.albumName}"></c:out></td>
+					<td><c:out value="${ msa.releaseTime}"></c:out></td>
+					<td><c:out value="${ msa.languageName}"></c:out></td>
+					<td><c:out value="${ msa.typeName}"></c:out></td>
+					<td><c:out value="${ msa.address}"></c:out></td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
+	<div id="pp" class="easyui-pagination"
+		data-options="total:2000,pageSize:10"
+		style="background: #efefef; border: 1px solid #ccc;"></div>
 	<div id="tb">
 		<div>
 			<a href="javascript:openSaleChanceAddDialog()"
@@ -127,10 +148,9 @@
 		<div>
 			&nbsp;公告编号：&nbsp;<input type="text" id="s_noticeid" size="20"
 				onkeydown="if(event.keyCode==13) searchSaleChance()" />
-			&nbsp;公告类型：&nbsp;
-			<!-- <input type="text" id="s_noticetype" size="20"
-				onkeydown="if(event.keyCode==13) searchSaleChance()" /> -->
-			<select class="easyui-combobox" id="s_noticetype" editable="false"
+			&nbsp;公告类型：&nbsp; <input type="text" id="s_noticetype" size="20"
+				onkeydown="if(event.keyCode==13) searchSaleChance()" /> <select
+				class="easyui-combobox" id="s_noticetype" editable="false"
 				panelHeight="auto">
 				<option value="">请选择...</option>
 				<option value="新闻">新闻</option>
@@ -154,34 +174,64 @@
 					<td>带<font color="red">*</font>为必填项
 					</td>
 				</tr>
-				<tr>
-					<td><font color="red">*</font>公告类型</td>
-					<td><select class="easyui-combobox" id="noticetype"
-						editable="false" panelHeight="auto" name="noticetype">
-							<option value="新闻">新闻</option>
-							<option value="通知">通知</option>
-					</select></td>
+				<tr hidden>
+					<td><font color="red">*</font>歌曲ID</td>
+					<td><input type="text" id="musicid" name="musicid" value=""
+						readonly /></td>
 				</tr>
 				<tr>
-					<td><font color="red">*</font>公告标题</td>
-					<td><input type="text" id="noticetitle" name="noticetitle"
-						class="easyui-validatebox" required="true" /></td>
+					<td><font color="red">*</font>歌曲名</td>
+					<td><input type="text" id="musicname" name="musicname"
+						class="easyui-validatebox" required /></td>
 
 				</tr>
-				<tr hidden="true">
-					<td><font color="red">*</font>发布人</td>
-					<td><input type="text" id="noticeauthor" name="noticeauthor" /></td>
+				<tr>
+					<td><font color="red">*</font>歌手名</td>
+					<td><input type="text" id="singername" name="singername"
+						class="easyui-validatebox" required /></td>
 				</tr>
 				<tr>
-					<td><font color="red">*</font>发布内容</td>
-					<td colspan="4"><textarea id="noticecontent"
-							name="noticecontent" style="width: 300px; height: 100px;"
-							class="easyui-validatebox" required="true"></textarea></td>
+					<td><font color="red">*</font>专辑名</td>
+					<td><input type="text" id="albumname" name="albumname"
+						class="easyui-validatebox" required /></td>
 				</tr>
 				<tr>
 					<td><font color="red">*</font>发布时间</td>
-					<td><input type="datetime" id="noticetime" name="noticetime"
-						class="easyui-validatebox" />
+					<td><input id="dd" type="text" class="easyui-datebox"
+						id="releasetime" name="releasetime" required></td>
+				</tr>
+				<tr>
+					<th>歌曲类型：</th>
+					<td><select style="width: 100px;" id="musictype"
+						name="musictype">
+							<option value="1" selected>流行</option>
+							<option value="2">古典</option>
+							<option value="3">爵士</option>
+							<option value="4">乡村</option>
+							<option value="5">嘻哈</option>
+							<option value="6">摇滚</option>
+							<option value="7">轻音乐</option>
+					</select></td>
+				</tr>
+				<tr>
+					<th>语种：</th>
+					<td><select style="width: 100px;" id="language"
+						name="language">
+							<option value="1" selected>汉语</option>
+							<option value="2">日语</option>
+							<option value="3">英语</option>
+							<option value="4">韩语</option>
+							<option value="5">德语</option>
+							<option value="6">法语</option>
+							<option value="7">西班牙语</option>
+							<option value="8">葡萄牙语</option>
+							<option value="9">印第安语</option>
+					</select></td>
+				</tr>
+				<tr>
+					<th>存放地址：</th>
+					<td><input type="text" id="address" name="address"
+						class="easyui-validatebox" required></td>
 				</tr>
 			</table>
 		</form>
