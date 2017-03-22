@@ -24,11 +24,6 @@
 	src="jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript">
-	$('.pagination-info').pagination('refresh', { // 改变选项并刷新分页栏信息
-		total : {pm.count},
-		rows : {pm.rows}
-	});
-
 	//关键字查询
 	function searchSaleChance() {
 		$("#dg").datagrid('load', {
@@ -83,14 +78,14 @@
 		});
 	}
 
-	/* function resetValue() {
+	function resetValue() {
 		$("#noticeid").val("");
 		$("#noticetype").val("");
 		$("#noticetitle").val("");
 		$("#noticeauthor").val("");
 		$("#noticecontent").val("");
 		$("#noticetime").val("");
-	} */
+	}
 
 	//关闭
 	function closeSaleChanceDialog() {
@@ -106,24 +101,24 @@
 </script>
 </head>
 <body style="margin: 1px">
-	<table id="dg" title="公告管理" class="easyui-datagrid" fitColumns="true"
+	<table id="dg" title="歌曲管理" class="easyui-datagrid" fitColumns="true"
 		pagination="true" rownumbers="true" url="admin/MusicServlet"
-		fit="true" toolbar="#tb">
+		fit="true"  toolbar="#tb" pageSize ="10"  pageList ="[ 10, 20, 30 ]" total="${total}">
 		<thead>
 			<tr>
 				<th field="cb" checkbox="true" align="center"></th>
-				<th field="musicid" width="5%" align="center">歌曲编号</th>
+				<th field="musicid" width="4%" align="center">歌曲编号</th>
 				<th field="musicname" width="15%" align="center">歌曲名</th>
 				<th field="singername" width="15%" align="center">歌手名</th>
 				<th field="albumname" width="15%" align="center">专辑名</th>
 				<th field="releasetime" width="10%" align="center">发布时间</th>
-				<th field="languagename" width="5%" align="center">语种</th>
-				<th field="typename" width="5%" align="center">类型</th>
+				<th field="languagename" width="10%" align="center">语种</th>
+				<th field="typename" width="10%" align="center">类型</th>
 				<th field="address" width="20%" align="center">歌曲存放地址</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${musicSingerAndAlbum}" var="msa">
+			<c:forEach items="${msa}" var="msa">
 				<tr>
 					<td>&nbsp;</td>
 					<td><c:out value="${ msa.musicId }"></c:out></td>
@@ -138,10 +133,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<div id="pp" class="easyui-pagination"
-		data-options="total:2000,pageSize:10"
-		style="background: #efefef; border: 1px solid #ccc;"></div>
-	<div id="tb">
 		<div>
 			<a href="javascript:openSaleChanceAddDialog()"
 				class="easyui-linkbutton" iconCls="icon-add" plain="true">创建</a> <a
@@ -163,7 +154,8 @@
 			&nbsp;发布人：&nbsp;<input type="text" id="s_noticeauthor" size="20"
 				onkeydown="if(event.keyCode==13) searchSaleChance()" /> <a
 				href="javascript:searchSaleChance()" class="easyui-linkbutton"
-				iconCls="icon-search" plain="true">搜索</a>
+				iconCls="icon-search" plain="true" afterPageText= '页    共 ${pages} 页',
+            displayMsg:='当前显示 ${from}-${to} 条记录,共 ${total} 条记录'>搜索</a>
 		</div>
 	</div>
 

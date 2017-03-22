@@ -46,7 +46,7 @@ public class MusicService {
 	 */
 	public int selectMusicByMusicNameAndSingerId(String musicName, int singerId) {
 		MusicDao musicDao = new MusicDao();
-		if(musicDao.selectMusicByMusicNameAndSingerId(musicName, singerId) == 0){
+		if (musicDao.selectMusicByMusicNameAndSingerId(musicName, singerId) == 0) {
 			return 0;
 		}
 		return 1;
@@ -72,23 +72,24 @@ public class MusicService {
 			return 2;
 		}
 	}
-	
+
 	/**
 	 * 查询所有歌曲信息（用于后台歌曲信息展示）
 	 * 
 	 * @return ArrayList<MusicSingerAndAlbum>
 	 */
-	public ArrayList<MusicSingerAndAlbum> selectAllMusic(){
+	public ArrayList<MusicSingerAndAlbum> selectAllMusic() {
 		MusicDao musicDao = new MusicDao();
 		return musicDao.selectAllMusic();
 	}
-	
+
 	/**
 	 * 修改歌曲（歌手、专辑、发行时间、语种、歌曲存放地址）
+	 * 
 	 * @param music
 	 * @return 1：更新成功；0：更新失败；
 	 */
-	public int updateMusic(Music music){
+	public int updateMusic(Music music) {
 		MusicDao musicDao = new MusicDao();
 		return musicDao.updateMusic(music);
 	}
@@ -99,8 +100,18 @@ public class MusicService {
 	 * @param pageSize
 	 * @return
 	 */
-	public PageModel selectAllMusic(int pageNo, int pageSize) {
+	public ArrayList<MusicSingerAndAlbum> selectAllMusic(int pageNo, int pageSize) {
 		MusicDao musicDao = new MusicDao();
 		return musicDao.selectAllMusic(pageNo, pageSize);
+	}
+
+	/**
+	 * 获取歌曲总条数
+	 * 
+	 * @return 歌曲总条数
+	 */
+	public int selectMusicCount() {
+		MusicDao musicDao = new MusicDao();
+		return musicDao.selectMusicCount();
 	}
 }

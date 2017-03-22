@@ -52,7 +52,7 @@ public class MusicDao {
 		}
 		return count;
 	}
-
+	
 	/**
 	 * 根据歌手Id和歌曲名查询歌曲
 	 * 
@@ -203,13 +203,12 @@ public class MusicDao {
 	 * @param pageSize
 	 * @return
 	 */
-	public PageModel selectAllMusic(int pageNo, int pageSize) {
+	public ArrayList<MusicSingerAndAlbum> selectAllMusic(int pageNo, int pageSize) {
 		String sql = "select m.musicid, m.musicname, s.singername, a.albumname, m.releasetime, name, mt.typename, m.adderss from music m, singer s, `language` l, musictype mt, album a where m.singerid = s.singerid and m.albumid = a.albumid and m.languageid = l.id and m.typeid = mt.typeid limit ?, ?";
 		Connection conn = Dao.Connection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		ArrayList<MusicSingerAndAlbum> list = new ArrayList<>();
-		PageModel pm = new PageModel();
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, (pageNo - 1)*pageSize );
@@ -230,19 +229,14 @@ public class MusicDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		pm.setList(list);
-		pm.setCount(selectMusicCount());
-		pm.setPageNo(pageNo);
-		pm.setPageSize(pageSize);
-		return pm;
+		return list;
 	}
 
 	/**
 	 * 查询歌曲条数
 	 * @return
 	 */
-	private int selectMusicCount() {
+	public int selectMusicCount() {
 		String sql = "select count(*) from music";
 		Connection conn = Dao.Connection();
 		PreparedStatement ps = null;

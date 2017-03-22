@@ -335,7 +335,7 @@ var _menus = {
 			"menuid" : "314",
 			"menuname" : "所有歌曲",
 			"icon" : "icon-nav",
-			"url" : "MusicServlet?op=allMusic"
+			"url" : "MusicServlet?op=musicFenye&page=1&rows=10"
 		}, {
 			"menuid" : "315",
 			"menuname" : "新增歌曲",

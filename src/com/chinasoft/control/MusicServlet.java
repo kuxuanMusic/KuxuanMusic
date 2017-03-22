@@ -1,7 +1,10 @@
 package com.chinasoft.control;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +16,8 @@ import com.chinasoft.entity.Music;
 import com.chinasoft.entity.MusicSingerAndAlbum;
 import com.chinasoft.service.MusicService;
 import com.chinasoft.util.DateUtil;
-import com.chinasoft.util.PageModel;
+
+import net.sf.json.JSONObject;
 
 /**
  * 与音乐相关的servlet
@@ -41,7 +45,7 @@ public class MusicServlet extends HttpServlet {
 			selectAllMusic(request, response);
 		} else if ("updateMusic".equals(op)) {
 			updateMusic(request, response);
-		}else if("musicFenye".equals(op)){
+		} else if ("musicFenye".equals(op)) {
 			musicFenye(request, response);
 		}
 	}
@@ -75,7 +79,7 @@ public class MusicServlet extends HttpServlet {
 		MusicService service = new MusicService();
 		Music music = new Music();
 		music.setMusicId(Integer.valueOf(request.getParameter("musicid")));
-		
+
 		String singerName = request.getParameter("singername"); // 歌手名
 		// 判断歌手是否存在
 		int singerId = service.selectSingerBySingerName(singerName);
@@ -100,9 +104,9 @@ public class MusicServlet extends HttpServlet {
 		music.setLanguageId(Integer.valueOf(request.getParameter("language"))); // 语种
 		music.setAddress(request.getParameter("address")); // 歌曲存放地址
 		int result = service.updateMusic(music);
-		if(result == 1){
+		if (result == 1) {
 			request.setAttribute("msg", "歌曲修改成功");
-		}else{
+		} else {
 			request.setAttribute("msg", "歌曲修改失败");
 		}
 	}
@@ -170,7 +174,7 @@ public class MusicServlet extends HttpServlet {
 	 * @throws IOException
 	 */
 	protected void musicFenye(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {		
+			throws ServletException, IOException {
 		// 每页多少条数据
 		int pageSize = 0;
 		// 当前是第几页
@@ -181,9 +185,13 @@ public class MusicServlet extends HttpServlet {
 		pageSize = Integer.valueOf(request.getParameter("rows"));
 		
 		MusicService service = new MusicService();
-		PageModel pm = service.selectAllMusic(pageNo, pageSize);
-				
-		request.setAttribute("pm", pm);
-		request.getRequestDispatcher("/admin/allMusic.jsp").forward(request, response);
+		ArrayList<MusicSingerAndAlbum> msa = service.selectAllMusic(pageNo, pageSize);
+		//System.out.println(msa.toString());
+		int total = service.selectMusicCount();
+		//System.out.println(total);
+		
+        request.setAttribute("msa", msa);
+        request.setAttribute("total", total);
+        request.getRequestDispatcher("allMusic.jsp").forward(request, response);
 	}
 }
