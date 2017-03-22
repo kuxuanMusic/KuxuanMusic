@@ -11,11 +11,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="MVServlet" method="post">
+<form action="MVServlet?op=addMV" method="post">
     <table style="width: 600px;margin: 200px auto;">
         <tr>
             <th>歌曲名：</th>
-            <td><input type="text" name="musicName" required></td>
+            <td><input type="text" name="musicName" id="musicName" required></td>
+        </tr>
+          <tr>
+            <th>歌手名：</th>
+            <td><input type="text" name="singerName" id=""singerName"" required></td>
         </tr>
         <tr>
             <th>存放地址：</th>
