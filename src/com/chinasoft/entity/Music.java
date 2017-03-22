@@ -118,6 +118,10 @@ public class Music {
 		return musicId;
 	}
 
+	public void setMusicId(int musicId) {
+		this.musicId = musicId;
+	}
+
 	@Override
 	public String toString() {
 		return "Music [musicId=" + musicId + ", musicName=" + musicName + ", singerId=" + singerId + ", albumId="

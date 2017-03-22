@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.chinasoft.dao.daoImpl.MusicDao;
 import com.chinasoft.entity.Music;
 import com.chinasoft.entity.MusicSingerAndAlbum;
+import com.chinasoft.util.PageModel;
 
 /**
  * 歌曲服务类
@@ -80,5 +81,26 @@ public class MusicService {
 	public ArrayList<MusicSingerAndAlbum> selectAllMusic(){
 		MusicDao musicDao = new MusicDao();
 		return musicDao.selectAllMusic();
+	}
+	
+	/**
+	 * 修改歌曲（歌手、专辑、发行时间、语种、歌曲存放地址）
+	 * @param music
+	 * @return 1：更新成功；0：更新失败；
+	 */
+	public int updateMusic(Music music){
+		MusicDao musicDao = new MusicDao();
+		return musicDao.updateMusic(music);
+	}
+
+	/**
+	 * 
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public PageModel selectAllMusic(int pageNo, int pageSize) {
+		MusicDao musicDao = new MusicDao();
+		return musicDao.selectAllMusic(pageNo, pageSize);
 	}
 }

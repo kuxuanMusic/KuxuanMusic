@@ -24,8 +24,11 @@
 	src="jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript">
-	var noticeauthor = '${adminUser.adminname}';
-	var url;
+	$('.pagination-info').pagination('refresh', { // 改变选项并刷新分页栏信息
+		total : {pm.count},
+		rows : {pm.rows}
+	});
+
 	//关键字查询
 	function searchSaleChance() {
 		$("#dg").datagrid('load', {
@@ -38,11 +41,11 @@
 
 	//添加
 	function openSaleChanceAddDialog() {
-		$("#dlg").dialog("open").dialog("setTitle", "添加公告信息");
+		$("#dlg").dialog("open").dialog("setTitle", "添加歌曲");
 		$("#createMan").val('${currentUser.trueName}');
 		$("#noticetime").val(getCurrentDateTime());
 		$("#noticeauthor").val(noticeauthor);
-		url = "Notice/save.do";
+		url = "admin/MusicServlet?op=addMusic";
 	}
 
 	//修改
@@ -53,9 +56,9 @@
 			return;
 		}
 		var row = selectedRows[0];
-		$("#dlg").dialog("open").dialog("setTitle", "编辑公告信息");
+		$("#dlg").dialog("open").dialog("setTitle", "编辑歌曲");
 		$("#fm").form("load", row);
-		url = "Notice/save.do?noticeid=" + row.noticeid;
+		url = "admin/MusicServlet?op=addMusic,id=" + row.musicid;
 	}
 
 	//保存
@@ -80,14 +83,14 @@
 		});
 	}
 
-	function resetValue() {
+	/* function resetValue() {
 		$("#noticeid").val("");
 		$("#noticetype").val("");
 		$("#noticetitle").val("");
 		$("#noticeauthor").val("");
 		$("#noticecontent").val("");
 		$("#noticetime").val("");
-	}
+	} */
 
 	//关闭
 	function closeSaleChanceDialog() {
@@ -104,8 +107,8 @@
 </head>
 <body style="margin: 1px">
 	<table id="dg" title="公告管理" class="easyui-datagrid" fitColumns="true"
-		pagination="true" rownumbers="true" url="Notice/list.do" fit="true"
-		toolbar="#tb">
+		pagination="true" rownumbers="true" url="admin/MusicServlet"
+		fit="true" toolbar="#tb">
 		<thead>
 			<tr>
 				<th field="cb" checkbox="true" align="center"></th>
@@ -120,7 +123,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${musicSingerAndAlbum}" var="msa" begin="0" end="9">
+			<c:forEach items="${musicSingerAndAlbum}" var="msa">
 				<tr>
 					<td>&nbsp;</td>
 					<td><c:out value="${ msa.musicId }"></c:out></td>
@@ -168,7 +171,7 @@
 		style="width: 500px; height: 450px; padding: 10px 20px" closed="true"
 		buttons="#dlg-buttons">
 
-		<form id="fm" method="post">
+		<form id="fm" method="post" action="MusicServlet?op=updateMusic">
 			<table cellspacing="8px">
 				<tr>
 					<td>带<font color="red">*</font>为必填项
