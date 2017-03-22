@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import com.chinasoft.dao.Dao;
 import com.chinasoft.entity.Singer;
+import com.chinasoft.util.PageModel;
 
 public class SingerDao {
 	/**
@@ -118,20 +120,116 @@ public class SingerDao {
 	 */
 	public int getSingerCount() {
 		Connection con = Dao.Connection();
-		String sql = "SELECT COUNT(*) FROM singer;";
+		String sql = "SELECT COUNT(*) FROM singer";
 		PreparedStatement prs = null;
 		ResultSet res = null;
 		int count = 0;
 		try {
 			prs = con.prepareStatement(sql);
 			res = prs.executeQuery();
+
 			while (res.next()) {
 				count = res.getInt("COUNT(*)");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+
 			Dao.closeConn(res, null, prs, con);
+		}
+		return count;
+	}
+
+	/**
+	 * 从指定位置查询指定条数数据，用于分页查询。
+	 * 
+	 * @param pageNo
+	 * @param pageSize
+	 * @return PagModel
+	 */
+	public PageModel selectSingerPage(int pageNo, int pageSize) {
+		Connection conn = Dao.Connection();
+		String sql = "SELECT * FROM singer LIMIT ?,?";
+		PreparedStatement pstmt = null;
+		ResultSet res = null;
+		ArrayList<Singer> list = new ArrayList<Singer>();
+		PageModel pm = new PageModel();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (pageNo - 1) * pageSize);
+			pstmt.setInt(2, pageSize);
+			res = pstmt.executeQuery();
+			while (res.next()) {
+				Singer singer = new Singer();
+				singer.setSingerId(res.getInt(1));
+				singer.setSingerName(res.getString(2));
+				singer.setProfile(res.getString(3));
+				list.add(singer);
+			}
+
+			pm.setList(list);
+			pm.setCount(getSingerCount());
+			pm.setPageNo(pageNo);
+			pm.setPageSize(pageSize);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dao.closeConn(res, null, pstmt, conn);
+		}
+		return pm;
+	}
+
+	/**
+	 * 根据id查询歌手数据
+	 * 
+	 * @param singerId
+	 * @return list
+	 */
+	public ArrayList<Singer> selectSingerById(String singerId) {
+		Connection con = Dao.Connection();
+		String sql = "SELECT * FROM singer WHERE singerid = ?";
+		PreparedStatement pre = null;
+		ResultSet res = null;
+		ArrayList<Singer> list = new ArrayList<Singer>();
+		try {
+			pre = con.prepareStatement(sql);
+			pre.setString(1, singerId);
+			res = pre.executeQuery();
+			while (res.next()) {
+				Singer singer = new Singer();
+				singer.setSingerId(res.getInt(1));
+				singer.setSingerName(res.getString(2));
+				singer.setProfile(res.getString(3));
+				list.add(singer);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dao.closeConn(res, null, pre, con);
+		}
+		return list;
+	}
+
+	/**
+	 * 根据用户id修改用户资料
+	 * 
+	 * @param singer
+	 * @return count
+	 */
+	public int updateSinger(Singer singer) {
+		Connection con = Dao.Connection();
+		String sql = "UPDATE singer SET profile = ? WHERE singerid = ?";
+		PreparedStatement pre = null;
+		int count = 0;
+		try {
+			pre = con.prepareStatement(sql);
+			pre.setString(1, singer.getProfile());
+			pre.setInt(2, singer.getSingerId());
+			count = pre.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dao.closeConn(null, null, pre, con);
 		}
 		return count;
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.chinasoft.dao.daoImpl.SingerDao;
 import com.chinasoft.entity.Singer;
+import com.chinasoft.util.PageModel;
 
 public class SingerService {
 	/**
@@ -61,6 +62,43 @@ public class SingerService {
 	public int getSingerCount() {
 		SingerDao dao = new SingerDao();
 		int count = dao.getSingerCount();
+		return count;
+	}
+
+	/**
+	 * 返回当前页码及每一页数据的条数
+	 * 
+	 * @param pageNo
+	 * @param pageSize
+	 * @return PageModel
+	 */
+	public PageModel getSingerPage(int pageNo, int pageSize) {
+		SingerDao dao = new SingerDao();
+		PageModel model = dao.selectSingerPage(pageNo, pageSize);
+		return model;
+	}
+
+	/**
+	 * 根据歌手id查询歌手信息
+	 * 
+	 * @param singerId
+	 * @return list
+	 */
+	public ArrayList<Singer> selectSingerById(String singerId) {
+		SingerDao dao = new SingerDao();
+		ArrayList<Singer> list = dao.selectSingerById(singerId);
+		return list;
+	}
+
+	/**
+	 * 根据歌手id修改歌手信息
+	 * 
+	 * @param singer
+	 * @return count
+	 */
+	public int updateSinger(Singer singer) {
+		SingerDao dao = new SingerDao();
+		int count = dao.updateSinger(singer);
 		return count;
 	}
 }

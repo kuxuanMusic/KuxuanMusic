@@ -10,6 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>添加歌手及简介</title>
+<link rel='icon' href='../images/music.ico ' type='image/x-ico'/>
 <link href="../css/singercss/addSinger.css" rel="stylesheet" />
 </head>
 <body>
@@ -23,7 +24,7 @@
 			</tr>
 			<tr>
 				<th>个人简介</th>
-				<td><textarea name="singerProfile" cols="40" rows="10"
+				<td><textarea name="singerProfile" cols="60" rows="15"
 						placeholder="请填写歌手的相关简介...." required></textarea></td>
 			</tr>
 			<tr>
