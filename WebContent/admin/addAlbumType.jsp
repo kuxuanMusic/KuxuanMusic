@@ -9,22 +9,20 @@
 <base href="<%=str%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="../css/album/albumall.css" rel="stylesheet" />
+<link href="css/album/albumall.css" rel="stylesheet" />          
 </head>
 <body>
 <form action="AlbumServlet" id="addAlbumType" method="post">
 	<input name="op" type="hidden"  value="addAlbumType" />
-    <table style="width: 400px;margin: 200px auto;">
-        <tr> <td colspan="2" style="text-align:center;">${msg}</td></tr>  
+    <table style="width: 1000px;margin: 200px auto;">
+        <tr> <td colspan="2" style="text-align:center;" id="msg">${msg}</td></tr>  
         <tr>
-            <th>类型：</th>
+            <th>新增类型名称：</th>
             <td><input type="text"  name="type"></td>
-        </tr>
-               
+        </tr>               
         <tr>
             <th colspan="2" style="text-align:center;">
-            	<br><input type="submit" value="提交" style="margin-left:-60px;"/>
-           
+            	<br><input type="submit" value="提交" style="margin-left:-60px;"/>           
             </th>
         </tr>
     </table>

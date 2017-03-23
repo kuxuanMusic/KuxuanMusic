@@ -5,13 +5,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%
+	String str = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
+%>
+<base href="<%=str%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="js/album/albumType.js"></script>
 <link href="css/album/albumall.css" rel="stylesheet"/>
 </head>
 <body>
-<table id="albumTypeinfo">
+<table id="albumTypeinfo" style="width: 1000px;margin:0px auto;">
     <thead>
     <tr>        
         <td>专辑类型</td>               
@@ -45,5 +49,6 @@
     	<tr>
     </tfoot>    
 </table>
+
 </body>
 </html>

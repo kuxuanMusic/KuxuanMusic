@@ -11,15 +11,14 @@
 <base href="<%=str%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="js/album/album.js"></script>
-
+<link href="css/album/albumall.css" rel="stylesheet" />
 <title>Insert title here</title>
 </head>
 <body>
-<table id="userinfo" >
+<table id="albuminfo"  style="width: 1000px;margin:0px auto;">
 
     <thead>
-    <tr>
-    	<td>专辑id</td>
+    <tr>    	
         <td>专辑名</td>
         <td>语种</td>
         <td>发行时间</td>
@@ -31,8 +30,7 @@
     <tbody>
     <c:forEach items="${pm.list}" var="album">
 	    <tr>
-	    	<input type="hidden" name="id" value="${album.albumId}"/>
-	    	<td>${album.albumId}</td>
+	    	<input type="hidden" name="id" value="${album.albumId}"/>	    
 	        <td>${album.albumName}</td>
 	        <td><c:choose>
 	        		<c:when test="${album.languageId ==1}">

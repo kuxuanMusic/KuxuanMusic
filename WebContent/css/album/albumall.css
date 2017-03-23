@@ -1,19 +1,28 @@
 @CHARSET "UTF-8";
 body table {
-	margin: 0 auto; /*水平居中*/
-	position: relative; /*脱离文档流*/
-	margin-top: 15%; /*偏移*/	
+	margin: 0 auto; 
+	position: relative; 
+	margin-top: 15%; 	
 	border-collapse: collapse;
 	broder-top:0px;
+}
+#albuminfo{
+	  width: 1000px;
+	  margin: 200px auto;	  
 }
 
 table th {
 	border: 1px solid #000000;
 }
 
-table td {
+ td {
 	border: 1px solid #000000;
+	text-align:center;
 }
+#addAlbum{
+	
+}
+
 #msg{
 	border:0px;
 	text-magin:center;

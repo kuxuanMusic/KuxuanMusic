@@ -62,16 +62,23 @@ public class AlbumServlet extends HttpServlet {
 				if (res == 1) {					
 					//新增成功
 					request.setAttribute("msg", "新增成功");
-					try {
-						response.sendRedirect("/admin/addAlbumType.jsp");
-					} catch (IOException e) {
-						
-						e.printStackTrace();
-					}
+					
+						try {
+							try {
+								request.getRequestDispatcher("/admin/addAlbumType.jsp").forward(request, response);
+							} catch (IOException e) {
+								
+								e.printStackTrace();
+							}
+						} catch (ServletException e) {
+							
+							e.printStackTrace();
+						}
+					
 				} else if (res == 2) {
 					request.setAttribute("msg", "类型已存在");
 					try {
-						request.getRequestDispatcher("/addAlbumType.jsp").forward(request, response);
+						request.getRequestDispatcher("/admin/addAlbumType.jsp").forward(request, response);
 					} catch (ServletException e) {
 						
 						e.printStackTrace();
@@ -82,7 +89,7 @@ public class AlbumServlet extends HttpServlet {
 				} else {
 					request.setAttribute("msg", "新增失败");
 					try {
-						request.getRequestDispatcher("/addAlbumType.jsp").forward(request, response);
+						request.getRequestDispatcher("/admin/addAlbumType.jsp").forward(request, response);
 					} catch (ServletException e) {
 						
 						e.printStackTrace();

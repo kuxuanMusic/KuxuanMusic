@@ -3,14 +3,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%
+	String str = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
+%>
+<base href="<%=str%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="../css/album/albumall.css" rel="stylesheet" />
+<link href="css/album/albumall.css" rel="stylesheet" />
 </head>
 <body>
-<form action="../AlbumServlet" id="addAlbum" method="post">
+<form action="AlbumServlet" id="addAlbum" method="post">
 	<input name="op" type="hidden"  value="addAlbum" />	
-    <table style="width: 600px;margin: 200px auto;">    
+    <table style="width: 1000px;margin: 200px auto;" id="addAlbum">    
         <tr> <td colspan="2" style="text-align:center;" id="msg">${msg}</td></tr>
         <tr>
             <th>专辑名：</th>

@@ -239,7 +239,7 @@ public class AlbumDao {
 	 * 
 	 */
 	public Album selectAlbumById(String albumId){
-		System.out.println(albumId);
+		
 		Connection conn = Dao.Connection();
 		String sql = "select * from album where albumid = ?";
 		PreparedStatement pstmt = null;

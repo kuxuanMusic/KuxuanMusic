@@ -12,13 +12,14 @@
 %>
 <base href="<%=str%>">
 <title>Insert title here</title>
+<link href="css/album/albumall.css" rel="stylesheet" />
 </head>
 <body>
 <form action="AlbumServlet" id="updateAlbum" method="post">
 	<input name="op" type="hidden"  value="updateAlbum" />
-    <table style="width: 600px;margin: 200px auto;">    	 
+    <table style="width: 600px;margin: 100px auto;">    	 
          <tr><input type="hidden" name="id" value="${al.albumId}"/></tr>
-         <tr> <td>${msg}</td></tr> 
+         <tr> <td colspan="2" style="text-align:center;color:red;" id="msg">${msg}</td></tr> 
         <tr>        	
             <th>专辑名：</th>
             <td><input type="text" name="name" value="${al.albumName}"></td>
