@@ -9,10 +9,9 @@
 </head>
 <body>
 <form action="../AlbumServlet" id="addAlbum" method="post">
-	<input name="op" type="hidden"  value="addAlbum" />
-    <table style="width: 600px;margin: 200px auto;">
-    
-        <tr> <td colspan="2" style="text-align:center;">${msg}</td></tr>
+	<input name="op" type="hidden"  value="addAlbum" />	
+    <table style="width: 600px;margin: 200px auto;">    
+        <tr> <td colspan="2" style="text-align:center;" id="msg">${msg}</td></tr>
         <tr>
             <th>专辑名：</th>
             <td><input type="text" name="name"></td>

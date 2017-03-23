@@ -9,6 +9,7 @@
 <base href="<%=str%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="../css/album/albumall.css" rel="stylesheet" />
 </head>
 <body>
 <form action="AlbumServlet" id="addAlbumType" method="post">
@@ -23,7 +24,7 @@
         <tr>
             <th colspan="2" style="text-align:center;">
             	<br><input type="submit" value="提交" style="margin-left:-60px;"/>
-            	<input type="reset" value="重置" style="margin-left:30px;"/>
+           
             </th>
         </tr>
     </table>

@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="js/album/albumType.js"></script>
+<link href="css/album/albumall.css" rel="stylesheet"/>
 </head>
 <body>
 <table id="albumTypeinfo">
@@ -44,7 +45,5 @@
     	<tr>
     </tfoot>    
 </table>
-
-
 </body>
 </html>
